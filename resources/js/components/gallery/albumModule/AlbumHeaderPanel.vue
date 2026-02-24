@@ -56,7 +56,7 @@
 							'h-8',
 							'w-8',
 							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -left-16  -translate-y-0 !absolute text-white',
+							'top-1/2 -left-16 !absolute text-white',
 						]"
 						@click="setColor(selectedColorIndex - 1)"
 						icon="pi pi-chevron-left"
@@ -67,14 +67,14 @@
 							'h-8',
 							'w-8',
 							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -right-16  -translate-y-0 !absolute text-white',
+							'top-1/2 -right-16 !absolute text-white',
 						]"
 						@click="setColor(selectedColorIndex + 1)"
 						icon="pi pi-chevron-right"
 					/>
 					<div
 						v-if="mode === 'edit'"
-						class="bg-(--p-toolbar-background)/60 text-white rounded-lg p-1 flex flex-row grow relative left-1/2 -translate-x-1/2 absolute top-5 -translate-y-1/2 z-10 w-70"
+						class="bg-(--p-toolbar-background)/60 text-white rounded-lg p-1 flex flex-row grow left-1/2 -translate-x-1/2 absolute top-5 -translate-y-1/2 z-10 w-70"
 					>
 						<HeaderEditButton @setPosition="setPosition('top-left')" :position="'top-left'" />
 						<HeaderEditButton @setPosition="setPosition('bottom-left')" :position="'bottom-left'" />
@@ -162,15 +162,7 @@ const POSITION_CLASSES = {
 
 const COLORS = computed(() => {
 	const p = props.album.preFormattedData.palette as Record<string, string> | null;
-	return [
-		"white",
-		"black",
-		p?.color1 ?? "blue-600",
-		p?.color2 ?? "red-600",
-		p?.color3 ?? "green-600",
-		p?.color4 ?? "purple-600",
-		p?.color5 ?? "yellow-600",
-	];
+	return ["white", "black", p?.color1 ?? "#2563eb", p?.color2 ?? "#dc2626", p?.color3 ?? "#16a34a", p?.color4 ?? "#9333ea", p?.color5 ?? "#ca8a04"];
 });
 
 const selectedColor = computed(() => COLORS.value[selectedColorIndex.value]);
@@ -318,7 +310,11 @@ function scrollToPictures() {
 }
 
 const initdata = ref<App.Http.Resources.GalleryConfigs.LandingPageResource | undefined>(undefined);
-InitService.fetchLandingData().then((data) => {
-	initdata.value = data.data;
-});
+InitService.fetchLandingData()
+	.then((data) => {
+		initdata.value = data.data;
+	})
+	.catch((e) => {
+		console.error(e);
+	});
 </script>
