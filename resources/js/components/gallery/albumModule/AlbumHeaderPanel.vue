@@ -15,26 +15,23 @@
 		<template v-if="is_album_enhanced_display_enabled">
 			<AlbumHeaderImage :src="albumStore.album.preFormattedData.url" :focus-x="focusX" :focus-y="focusY" />
 			<div class="absolute right-1 top-1 flex flex-col gap-2 z-100">
-				<button
+				<Button
 					v-if="albumStore.rights?.can_edit && mode === 'normal'"
 					@click="enableEditMode"
-					class="bg-(--p-toolbar-background)/60 rounded-lg px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
-				>
-					{{ $t("gallery.album.hero.edit") }}
-				</button>
+					class="bg-(--p-toolbar-background)/60 rounded-lg border-0 px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
+					:label="$t('gallery.album.hero.edit')"
+				/>
 				<template v-if="albumStore.rights?.can_edit && mode === 'edit'">
-					<button
+					<Button
 						@click="saveChanges"
-						class="bg-(--p-toolbar-background)/60 rounded-lg px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
-					>
-						{{ $t("gallery.album.hero.save") }}
-					</button>
-					<button
+						class="bg-(--p-toolbar-background)/60 rounded-lg border-0 px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
+						:label="$t('gallery.album.hero.save')"
+					/>
+					<Button
 						@click="isFocusPickerVisible = true"
-						class="bg-(--p-toolbar-background)/60 rounded-lg px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
-					>
-						{{ $t("gallery.set_focus") }}
-					</button>
+						class="bg-(--p-toolbar-background)/60 rounded-lg border-0 px-2 py-1 text-white hover:bg-white/30 cursor-pointer"
+						:label="$t('gallery.set_focus')"
+					/>
 				</template>
 			</div>
 
@@ -102,7 +99,7 @@
 						{{ album.preFormattedData.min_max_text }}
 					</span>
 					<button
-						class="t-4 sm:mt-2 inline-block px-6 py-3 sm:px-10 sm:py-4 lg:px-12 lg:py-4 text-2xl sm:text-sm lg:text-xs font-semibold tracking-wide sm:tracking-wider uppercase cursor-pointer hover:bg-white/10 w-fit border"
+						class="mt-4 sm:mt-2 inline-block px-6 py-3 sm:px-10 sm:py-4 lg:px-12 lg:py-4 text-2xl sm:text-sm lg:text-xs font-semibold tracking-wide sm:tracking-wider uppercase cursor-pointer hover:bg-white/10 w-fit border"
 						:style="{ color: selectedColor, borderColor: selectedColor }"
 						@click="scrollToPictures"
 					>
@@ -136,6 +133,7 @@ import { storeToRefs } from "pinia";
 import { useLycheeStateStore } from "@/stores/LycheeState";
 import { useToast } from "primevue/usetoast";
 import { trans } from "laravel-vue-i18n";
+import Button from "primevue/button";
 
 const lycheeStore = useLycheeStateStore();
 const albumStore = useAlbumStore();
@@ -215,7 +213,11 @@ function initFromProps() {
 		const key = Object.keys(POSITION_ENUMS).find((k) => POSITION_ENUMS[k] === posEnum);
 		if (key) {
 			position.value = key as keyof typeof POSITION_CLASSES;
+		} else {
+			position.value = "top-left";
 		}
+	} else {
+		position.value = "top-left";
 	}
 
 	if (props.album.preFormattedData?.header_photo_focus) {
@@ -232,6 +234,7 @@ watch(
 	() => {
 		initFromProps();
 	},
+	{ deep: true },
 );
 
 onMounted(() => {
@@ -245,6 +248,7 @@ function enableEditMode() {
 
 function saveChanges() {
 	if (!("editable" in props.album) || !props.album.editable) {
+		toast.add({ severity: "warn", summary: trans("toasts.error"), detail: trans("toasts.update_failed"), life: 3000 });
 		return;
 	}
 
@@ -263,7 +267,7 @@ function saveChanges() {
 		photo_layout: data.photo_layout ?? null,
 		copyright: data.copyright ?? null,
 		header_id: data.header_id ?? null,
-		is_compact: false, // Default to false as we are in expanded mode
+		is_compact: false,
 		is_pinned: data.is_pinned,
 		album_timeline: data.album_timeline ?? null,
 		photo_timeline: data.photo_timeline ?? null,
