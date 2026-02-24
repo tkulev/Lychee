@@ -312,8 +312,6 @@ function togglePin() {
 	});
 }
 
-const paginatorTop = ref<HTMLDivElement | null>(null);
-
 const albumCallbacks = {
 	setAsCover: () => {
 		if (albumStore.album === undefined) return;

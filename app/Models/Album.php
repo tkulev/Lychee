@@ -474,16 +474,22 @@ class Album extends BaseAlbum implements Node
 
 		// Handle palette colors (color1 through color5)
 		if (str_starts_with($value, 'color')) {
-			$idx = (int) str_replace('color', '', $value); // 1-5
 			$palette = $this->getCoverPalette();
 
 			if ($palette === null) {
 				return '#ffffff';
 			}
 
-			$field = 'colour_' . $idx;
+			$color = match ($value) {
+				'color1' => $palette->colour_1,
+				'color2' => $palette->colour_2,
+				'color3' => $palette->colour_3,
+				'color4' => $palette->colour_4,
+				'color5' => $palette->colour_5,
+				default => '#ffffff',
+			};
 
-			return $palette->$field ?? '#ffffff';
+			return $color;
 		}
 
 		return '#ffffff';

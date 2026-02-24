@@ -37,6 +37,10 @@ class PreFormattedAlbumData extends Data
 
 	public ?array $palette = null;
 
+	public ?string $title_color = null;
+	public ?string $title_position = null;
+	public ?array $header_photo_focus = null;
+
 	public function __construct(AbstractAlbum $album, ?SizeVariant $header)
 	{
 		$min_max_date_format = request()->configs()->getValueAsString('date_format_hero_min_max');
@@ -67,6 +71,9 @@ class PreFormattedAlbumData extends Data
 			$this->num_children = $album->num_children;
 			$this->num_photos = $album->num_photos;
 			$this->license = $album->license === LicenseType::NONE ? '' : $album->license->localization();
+			$this->title_color = $album->title_color?->value;
+			$this->title_position = $album->title_position?->value;
+			$this->header_photo_focus = $album->header_photo_focus;
 		}
 	}
 

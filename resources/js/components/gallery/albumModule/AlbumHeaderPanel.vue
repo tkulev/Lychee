@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useTemplateRef, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useAlbumStore } from "@/stores/AlbumState";
 import AlbumService, { UpdateAbumData } from "@/services/album-service";
 import HeaderEditButton from "./HeaderEditButton.vue";
@@ -149,7 +149,7 @@ const emits = defineEmits<{
 }>();
 
 const props = defineProps<{
-	album: any;
+	album: App.Http.Resources.Models.AlbumResource;
 }>();
 
 const POSITION_CLASSES = {
@@ -161,7 +161,7 @@ const POSITION_CLASSES = {
 };
 
 const COLORS = computed(() => {
-	const p = props.album.preFormattedData.palette as any;
+	const p = props.album.preFormattedData.palette as Record<string, string> | null;
 	return [
 		"white",
 		"black",
@@ -195,8 +195,8 @@ const focusX = ref<number | null>(null);
 const focusY = ref<number | null>(null);
 
 function initFromProps() {
-	if (props.album.editable?.title_color) {
-		const colorEnum = props.album.editable.title_color;
+	if (props.album.preFormattedData?.title_color) {
+		const colorEnum = props.album.preFormattedData.title_color as App.Enum.AlbumTitleColor;
 		const index = COLOR_ENUMS.indexOf(colorEnum);
 		if (index !== -1) {
 			selectedColorIndex.value = index;
@@ -205,8 +205,8 @@ function initFromProps() {
 		selectedColorIndex.value = 0; // Default to white
 	}
 
-	if (props.album.editable?.title_position) {
-		const posEnum = props.album.editable.title_position;
+	if (props.album.preFormattedData?.title_position) {
+		const posEnum = props.album.preFormattedData.title_position as App.Enum.AlbumTitlePosition;
 		// Reverse mapping from enum to key
 		const key = Object.keys(POSITION_ENUMS).find((k) => POSITION_ENUMS[k] === posEnum);
 		if (key) {
@@ -214,9 +214,9 @@ function initFromProps() {
 		}
 	}
 
-	if (props.album.editable?.header_photo_focus) {
-		focusX.value = props.album.editable.header_photo_focus.x;
-		focusY.value = props.album.editable.header_photo_focus.y;
+	if (props.album.preFormattedData?.header_photo_focus) {
+		focusX.value = props.album.preFormattedData.header_photo_focus.x;
+		focusY.value = props.album.preFormattedData.header_photo_focus.y;
 	} else {
 		focusX.value = null;
 		focusY.value = null;

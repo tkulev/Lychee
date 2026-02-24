@@ -893,7 +893,10 @@ declare namespace App.Http.Resources.Models.Utils {
 		created_at: string | null;
 		description: string | null;
 		copyright: string | null;
-		palette: Array<any> | null;
+		palette: Record<string, string> | null;
+		title_color: string | null;
+		title_position: string | null;
+		header_photo_focus: { x: number; y: number } | null;
 	};
 	export type PreformattedPhotoData = {
 		created_at: string;
