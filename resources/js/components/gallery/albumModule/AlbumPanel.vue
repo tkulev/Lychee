@@ -275,6 +275,12 @@ const photoCallbacks = {
 		const isToggleOff = albumStore.modelAlbum?.header_id === selectedPhoto.value!.id;
 		if (albumStore.modelAlbum !== undefined) {
 			albumStore.modelAlbum.header_id = isToggleOff ? null : selectedPhoto.value!.id;
+			if (albumStore.modelAlbum.editable) {
+				albumStore.modelAlbum.editable.header_photo_focus = null;
+			}
+			if (albumStore.modelAlbum.preFormattedData) {
+				albumStore.modelAlbum.preFormattedData.header_photo_focus = null;
+			}
 		}
 		if (
 			albumStore.album !== undefined &&
@@ -283,6 +289,7 @@ const photoCallbacks = {
 			albumStore.album.editable !== null
 		) {
 			albumStore.album.editable.header_id = isToggleOff ? null : selectedPhoto.value!.id;
+			albumStore.album.editable.header_photo_focus = null;
 		}
 		// Update the header image URL in the album's preFormattedData
 		if (albumStore.album.preFormattedData) {
@@ -292,6 +299,7 @@ const photoCallbacks = {
 				// Use medium or small variant for the header image
 				const headerUrl = selectedPhoto.value!.size_variants.medium?.url ?? selectedPhoto.value!.size_variants.small?.url ?? null;
 				albumStore.album.preFormattedData.url = headerUrl;
+				albumStore.album.preFormattedData.header_photo_focus = null;
 			}
 		}
 		AlbumService.clearCache(albumStore.album.id);

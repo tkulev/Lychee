@@ -50,30 +50,28 @@
 				:class="positionClasses"
 			>
 				<div class="relative">
-					<button
+					<Button
 						v-if="mode === 'edit'"
 						:class="[
 							'h-8',
 							'w-8',
-							'bg-(--p-toolbar-background)/60 rounded-md cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -left-16  -translate-y-0 absolute text-white',
+							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
+							'top-1/2 -left-16  -translate-y-0 !absolute text-white',
 						]"
 						@click="setColor(selectedColorIndex - 1)"
-					>
-						<i :class="['pi', 'pi-chevron-left']" />
-					</button>
-					<button
+						icon="pi pi-chevron-left"
+					/>
+					<Button
 						v-if="mode === 'edit'"
 						:class="[
 							'h-8',
 							'w-8',
-							'bg-(--p-toolbar-background)/60 rounded-md cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -right-16  -translate-y-0 absolute text-white',
+							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
+							'top-1/2 -right-16  -translate-y-0 !absolute text-white',
 						]"
 						@click="setColor(selectedColorIndex + 1)"
-					>
-						<i :class="['pi', 'pi-chevron-right']" />
-					</button>
+						icon="pi pi-chevron-right"
+					/>
 					<div
 						v-if="mode === 'edit'"
 						class="bg-(--p-toolbar-background)/60 text-white rounded-lg p-1 flex flex-row grow relative left-1/2 -translate-x-1/2 absolute top-5 -translate-y-1/2 z-10 w-70"
