@@ -149,7 +149,11 @@ const emits = defineEmits<{
 }>();
 
 const props = defineProps<{
-	album: App.Http.Resources.Models.AlbumResource;
+	album:
+		| App.Http.Resources.Models.AlbumResource
+		| App.Http.Resources.Models.HeadAlbumResource
+		| App.Http.Resources.Models.HeadTagAlbumResource
+		| App.Http.Resources.Models.HeadSmartAlbumResource;
 }>();
 
 const POSITION_CLASSES = {
@@ -240,11 +244,11 @@ function enableEditMode() {
 }
 
 function saveChanges() {
-	if (!props.album.editable) {
+	if (!("editable" in props.album) || !props.album.editable) {
 		return;
 	}
 
-	const data: App.Http.Resources.Editable.EditableBaseAlbumResource = props.album.editable;
+	const data: App.Http.Resources.Editable.EditableBaseAlbumResource = props.album.editable as App.Http.Resources.Editable.EditableBaseAlbumResource;
 
 	const payload: UpdateAbumData = {
 		album_id: props.album.id,

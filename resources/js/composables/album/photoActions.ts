@@ -71,6 +71,9 @@ export function usePhotoActions(photoStore: PhotoStore, albumId: Ref<string | un
 			if (albumStore.modelAlbum !== undefined) {
 				albumStore.modelAlbum.header_id = isToggleOff ? null : photoStore.photo!.id;
 			}
+			if (albumStore.album !== undefined && "editable" in albumStore.album && albumStore.album.editable !== undefined && albumStore.album.editable !== null) {
+				albumStore.album.editable.header_id = isToggleOff ? null : photoStore.photo!.id;
+			}
 
 			// Update the header image URL in the album's preFormattedData
 			if (albumStore.album?.preFormattedData) {
