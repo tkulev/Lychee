@@ -83,7 +83,6 @@ trait HasHeaderUrl
 		}
 
 		return $photo === null ? null : SizeVariant::query()
-			->with('photo.palette')
 			->where('photo_id', '=', $photo->photo_id)
 			->where('type', '>', 0)
 			->orderBy('type', 'asc')
