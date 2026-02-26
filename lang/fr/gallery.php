@@ -120,7 +120,6 @@ return [
             'download' => 'Télécharger l\'album',
             'share' => 'Partager l\'album',
             'embed' => 'Embed Album',
-            'stats_only_se' => 'Statistiques disponibles dans l’édition Supporter',
             'edit' => 'Edit',
             'save' => 'Save',
             'open_gallery' => 'Open gallery',
