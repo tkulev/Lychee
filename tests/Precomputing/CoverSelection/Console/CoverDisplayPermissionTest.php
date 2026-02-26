@@ -40,15 +40,15 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 		// Create public and private photos
 		$publicPhoto = Photo::factory()->owned_by($owner)->create([
 			'title' => 'Public Photo',
-			'is_starred' => false,
+			'is_highlighted' => false,
 			'taken_at' => new Carbon('2023-01-01 10:00:00'),
 		]);
 		$publicPhoto->albums()->attach($album->id);
 
 		$privatePhoto = Photo::factory()->owned_by($owner)->create([
 			'title' => 'Private Photo',
-			'is_starred' => true,
-			'taken_at' => new Carbon('2023-12-31 10:00:00'), // Starred, newer
+			'is_highlighted' => true,
+			'taken_at' => new Carbon('2023-12-31 10:00:00'), // highlighted, newer
 		]);
 		$privatePhoto->albums()->attach($album->id);
 
@@ -63,7 +63,7 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 
 		$album->refresh();
 
-		// Admin should see max-privilege cover (privatePhoto, starred + newer)
+		// Admin should see max-privilege cover (privatePhoto, highlighted + newer)
 		Auth::login($this->admin);
 		$this->assertEquals($privatePhoto->id, $album->auto_cover_id_max_privilege);
 
@@ -81,11 +81,11 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 		$album = Album::factory()->as_root()->owned_by($owner)->create();
 
 		$photo1 = Photo::factory()->owned_by($owner)->create([
-			'is_starred' => false,
+			'is_highlighted' => false,
 			'taken_at' => new Carbon('2023-01-01'),
 		]);
 		$photo2 = Photo::factory()->owned_by($owner)->create([
-			'is_starred' => true,
+			'is_highlighted' => true,
 			'taken_at' => new Carbon('2023-12-31'),
 		]);
 
@@ -101,7 +101,7 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 
 		Auth::login($owner);
 
-		// Owner should see max-privilege cover (photo2, starred + newer)
+		// Owner should see max-privilege cover (photo2, highlighted + newer)
 		$this->assertEquals($photo2->id, $album->auto_cover_id_max_privilege);
 	}
 
@@ -117,7 +117,7 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 
 		// Only create private photos (no public photos)
 		$privatePhoto = Photo::factory()->owned_by($owner)->create([
-			'is_starred' => true,
+			'is_highlighted' => true,
 			'taken_at' => new Carbon('2023-12-31'),
 		]);
 		$privatePhoto->albums()->attach($album->id);
@@ -153,11 +153,11 @@ class CoverDisplayPermissionTest extends BasePrecomputingTest
 
 		// Create mix of photos
 		$publicPhoto = Photo::factory()->owned_by($owner)->create([
-			'is_starred' => false,
+			'is_highlighted' => false,
 			'taken_at' => new Carbon('2023-01-01'),
 		]);
 		$privatePhoto = Photo::factory()->owned_by($owner)->create([
-			'is_starred' => true,
+			'is_highlighted' => true,
 			'taken_at' => new Carbon('2023-12-31'),
 		]);
 

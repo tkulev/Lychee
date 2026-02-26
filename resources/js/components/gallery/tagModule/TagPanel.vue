@@ -82,7 +82,7 @@ const emits = defineEmits<{
 	goBack: [];
 }>();
 
-const { toggleDelete, toggleMove, toggleRename, toggleTag, toggleCopy } = useGalleryModals(togglableStore);
+const { toggleDelete, toggleMove, toggleRename, toggleTag, toggleLicense, toggleCopy, toggleApplyRenamer } = useGalleryModals(togglableStore);
 
 const { selectedPhoto, selectedPhotos, selectedPhotosIds, photoSelect: selectPhoto } = useSelection(photosStore, albumsStore, togglableStore);
 
@@ -94,18 +94,19 @@ function photoClick(photoId: string, _e: MouseEvent) {
 
 const photoCallbacks = {
 	star: () => {
-		PhotoService.star(selectedPhotosIds.value, true);
+		PhotoService.highlight(selectedPhotosIds.value, true);
 		AlbumService.clearCache();
 		emits("refresh");
 	},
 	unstar: () => {
-		PhotoService.star(selectedPhotosIds.value, false);
+		PhotoService.highlight(selectedPhotosIds.value, false);
 		AlbumService.clearCache();
 		emits("refresh");
 	},
 	setAsCover: () => {},
 	setAsHeader: () => {},
 	toggleTag: toggleTag,
+	toggleLicense: toggleLicense,
 	toggleRename: toggleRename,
 	toggleCopyTo: toggleCopy,
 	toggleMove: toggleMove,
@@ -113,6 +114,7 @@ const photoCallbacks = {
 	toggleDownload: () => {
 		PhotoService.download(selectedPhotosIds.value, getParentId());
 	},
+	toggleApplyRenamer: toggleApplyRenamer,
 };
 
 const albumCallbacks = {
@@ -123,6 +125,7 @@ const albumCallbacks = {
 	toggleDelete: () => {},
 	toggleDownload: () => {},
 	togglePin: () => {},
+	toggleApplyRenamer: () => {},
 };
 
 const {

@@ -45,7 +45,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Неотсортированные',
-        'starred' => 'Избранные',
+        'highlighted' => 'Избранные',
         'recent' => 'Недавние',
         'public' => 'Публичные',
         'on_this_day' => 'В этот день',
@@ -66,6 +66,7 @@ return [
         'masonry' => 'С пропорциями, кладка',
         'grid' => 'С пропорциями, сетка',
         'filmstrip' => 'Плёнка',
+        'list' => 'Список',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -99,8 +100,8 @@ return [
     'album' => [
         'header_albums' => 'Альбомы',
         'header_photos' => 'Фотографии',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'Здесь ничего нет',
         'upload' => 'Загрузить фотографии',
         'tabs' => [
@@ -123,6 +124,8 @@ return [
             'edit' => 'Edit',
             'save' => 'Save',
             'open_gallery' => 'Open gallery',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Кол-во посещений',
@@ -176,8 +179,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Добавить в избранное',
-            'unstar' => 'Убрать из избранного',
+            'highlight' => 'Добавить в избранное',
+            'unhighlight' => 'Убрать из избранного',
             'set_album_header' => 'Установить как заголовок альбома',
             'move' => 'Переместить',
             'delete' => 'Удалить',
@@ -256,12 +259,14 @@ return [
         'consent' => 'Нажмите для согласия.',
     ],
     'menus' => [
-        'star' => 'Добавить в избранное',
-        'unstar' => 'Убрать из избранного',
-        'star_all' => 'Добавить все в избранное',
-        'unstar_all' => 'Убрать все из избранного',
+        'highlight' => 'Добавить в избранное',
+        'unhighlight' => 'Убрать из избранного',
+        'highlight_all' => 'Добавить все в избранное',
+        'unhighlight_all' => 'Убрать все из избранного',
         'tag' => 'Тег',
         'tag_all' => 'Тегировать все',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Установить обложку альбома',
         'remove_header' => 'Удалить заголовок альбома',
         'set_header' => 'Установить заголовок альбома',
@@ -278,6 +283,8 @@ return [
         'download_all' => 'Скачать выбранные',
         'merge' => 'Объединить',
         'merge_all' => 'Объединить выбранные',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Загрузить фото',
         'import_link' => 'Импортировать по ссылке',
         'import_server' => 'Импортировать с сервера',

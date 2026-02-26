@@ -251,7 +251,7 @@ Returns paginated child albums for a parent album.
 
 **GET** `/api/v2/Album::photos`
 
-Returns paginated photos for an album. Supports regular albums, Smart albums (Recent, Starred, etc.), and Tag albums.
+Returns paginated photos for an album. Supports regular albums, Smart albums (Recent, Highlighted, etc.), and Tag albums.
 
 **Parameters:**
 | Parameter | Type | Required | Default | Description |
@@ -326,4 +326,4 @@ Page sizes and UI modes are configurable via the admin settings panel or directl
 
 ---
 
-*Last updated: January 21, 2026*
+*Last updated: February 24, 2026*

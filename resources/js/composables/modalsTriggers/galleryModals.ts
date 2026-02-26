@@ -15,9 +15,12 @@ export function useGalleryModals(togglableStore: TogglablesStateStore) {
 		embed_code_mode,
 		is_import_from_link_open,
 		is_tag_visible,
+		is_license_visible,
 		is_copy_visible,
 		is_import_from_dropbox_open,
 		is_import_from_server_open,
+		is_apply_renamer_visible,
+		is_watermark_confirm_visible,
 	} = storeToRefs(togglableStore);
 
 	function toggleCreateAlbum() {
@@ -73,8 +76,20 @@ export function useGalleryModals(togglableStore: TogglablesStateStore) {
 		is_tag_visible.value = !is_tag_visible.value;
 	}
 
+	function toggleLicense() {
+		is_license_visible.value = !is_license_visible.value;
+	}
+
 	function toggleCopy() {
 		is_copy_visible.value = !is_copy_visible.value;
+	}
+
+	function toggleApplyRenamer() {
+		is_apply_renamer_visible.value = !is_apply_renamer_visible.value;
+	}
+
+	function toggleWatermarkConfirm() {
+		is_watermark_confirm_visible.value = !is_watermark_confirm_visible.value;
 	}
 
 	return {
@@ -105,7 +120,13 @@ export function useGalleryModals(togglableStore: TogglablesStateStore) {
 		toggleUpload,
 		is_tag_visible,
 		toggleTag,
+		is_license_visible,
+		toggleLicense,
 		is_copy_visible,
 		toggleCopy,
+		is_apply_renamer_visible,
+		toggleApplyRenamer,
+		is_watermark_confirm_visible,
+		toggleWatermarkConfirm,
 	};
 }

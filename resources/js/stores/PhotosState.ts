@@ -4,7 +4,7 @@ const { spliter, merge } = useSplitter();
 
 export type PhotosStore = ReturnType<typeof usePhotosStore>;
 
-export type PhotoRatingFilter = null | 1 | 2 | 3 | 4 | 5 | "starred";
+export type PhotoRatingFilter = null | 1 | 2 | 3 | 4 | 5 | "highlighted";
 
 export const usePhotosStore = defineStore("photos-store", {
 	state: () => ({
@@ -105,8 +105,8 @@ export const usePhotosStore = defineStore("photos-store", {
 		},
 	},
 	getters: {
-		starredPhotosCount(): number {
-			return this.photos.filter((p) => p.is_starred).length;
+		highlightedPhotosCount(): number {
+			return this.photos.filter((p) => p.is_highlighted).length;
 		},
 		/**
 		 * Check if any photo in the collection has a user rating.
@@ -116,7 +116,7 @@ export const usePhotosStore = defineStore("photos-store", {
 			return this.photos.some((p) => p.rating !== null && p.rating.rating_user > 0);
 		},
 		/**
-		 * Get filtered photos based on the current rating filter or starred photos filter.
+		 * Get filtered photos based on the current rating filter or highlighted photos filter.
 		 * Returns all photos if no filter is active or no photos matches the filter.
 		 */
 		filteredPhotos(): App.Http.Resources.Models.PhotoResource[] {
@@ -124,33 +124,33 @@ export const usePhotosStore = defineStore("photos-store", {
 				return this.photos;
 			}
 
-			if (this.photoRatingFilter === "starred") {
-				return this.photos.filter((p) => p.is_starred);
+			if (this.photoRatingFilter === "highlighted") {
+				return this.photos.filter((p) => p.is_highlighted);
 			}
 
-			if (!this.hasRatedPhotos && !this.starredPhotosCount) {
+			if (!this.hasRatedPhotos && !this.highlightedPhotosCount) {
 				return this.photos;
 			}
 			return this.photos.filter((p) => p.rating !== null && p.rating.rating_user >= (this.photoRatingFilter as number));
 		},
 		/**
-		 * Get filtered timeline data based on the current rating filter or starred photos filter.
+		 * Get filtered timeline data based on the current rating filter or highlighted photos filter.
 		 * Returns undefined if no timeline data exists.
 		 */
 		filteredPhotosTimeline(): SplitData<App.Http.Resources.Models.PhotoResource>[] | undefined {
 			if (this.photosTimeline === undefined) {
 				return undefined;
 			}
-			if (this.photoRatingFilter === "starred") {
+			if (this.photoRatingFilter === "highlighted") {
 				return this.photosTimeline
 					.map((group) => ({
 						...group,
-						data: group.data.filter((p) => p.is_starred),
+						data: group.data.filter((p) => p.is_highlighted),
 					}))
 					.filter((group) => group.data.length > 0);
 			}
 
-			if (this.photoRatingFilter === null || (!this.hasRatedPhotos && !this.starredPhotosCount)) {
+			if (this.photoRatingFilter === null || (!this.hasRatedPhotos && !this.highlightedPhotosCount)) {
 				return this.photosTimeline;
 			}
 			const filter = this.photoRatingFilter as number;

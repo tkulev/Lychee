@@ -45,7 +45,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Unsortiert',
-        'starred' => 'Als Favorit markiert',
+        'highlighted' => 'Als Favorit markiert',
         'recent' => 'Neueste',
         'public' => 'Öffentlich',
         'on_this_day' => 'An diesem Tag',
@@ -66,6 +66,7 @@ return [
         'masonry' => 'Mit Seitenverhältnis, masonry',
         'grid' => 'Mit Seitenverhältnis, Raster',
         'filmstrip' => 'Filmstreifen',
+        'list' => 'Listenansicht',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -99,8 +100,8 @@ return [
     'album' => [
         'header_albums' => 'Alben',
         'header_photos' => 'Fotos',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'Hier gibt es nichts zu sehen',
         'upload' => 'Fotos hochladen',
         'tabs' => [
@@ -123,6 +124,8 @@ return [
             'edit' => 'Edit',
             'save' => 'Save',
             'open_gallery' => 'Open gallery',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Anzahl der Besuche',
@@ -176,8 +179,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Mit Stern bewerten',
-            'unstar' => 'Stern entfernen',
+            'highlight' => 'Mit Stern bewerten',
+            'unhighlight' => 'Stern entfernen',
             'set_album_header' => 'Als Album Header festlegen',
             'move' => 'Verschieben',
             'delete' => 'Löschen',
@@ -256,12 +259,14 @@ return [
         'consent' => 'Tippen zum Einverständnis.',
     ],
     'menus' => [
-        'star' => 'Favorit hinzufügen',
-        'unstar' => 'Favorit entfernen',
-        'star_all' => 'Ausgewähltes als Favorit markieren',
-        'unstar_all' => 'Bei ausgewähltem Favoritenmarkierung entfernen',
+        'highlight' => 'Favorit hinzufügen',
+        'unhighlight' => 'Favorit entfernen',
+        'highlight_all' => 'Ausgewähltes als Favorit markieren',
+        'unhighlight_all' => 'Bei ausgewähltem Favoritenmarkierung entfernen',
         'tag' => 'Tag',
         'tag_all' => 'Ausgewähltes taggen',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Album Cover festlegen',
         'remove_header' => 'Album Header entfernen',
         'set_header' => 'Album Header festlegen',
@@ -278,6 +283,8 @@ return [
         'download_all' => 'Ausgewähltes herunterladen',
         'merge' => 'Zusammenführen',
         'merge_all' => 'Ausgewähltes zusammenführen',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Foto hochladen',
         'import_link' => 'Von Link importieren',
         'import_server' => 'Vom Server importieren',

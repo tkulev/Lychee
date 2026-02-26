@@ -153,17 +153,17 @@ class RecomputeAlbumStatsJobTest extends BasePrecomputingTest
 
 		// Create public and private photos
 		$publicPhoto = Photo::factory()->in($album2)->owned_by($user)->create([
-			'is_starred' => false,
+			'is_highlighted' => false,
 		]);
 		$privatePhoto = Photo::factory()->in($album3)->owned_by($user)->create([
-			'is_starred' => true, // Starred photo should be preferred
+			'is_highlighted' => true, // Highlighted photo should be preferred
 		]);
 
 		// Run job
 		$job = new RecomputeAlbumStatsJob($album->id);
 		$job->handle();
 
-		// Assert max-privilege cover is the starred private photo
+		// Assert max-privilege cover is the highlighted private photo
 		$album->refresh();
 		$this->assertEquals($privatePhoto->id, $album->auto_cover_id_max_privilege);
 		$this->assertEquals($publicPhoto->id, $album->auto_cover_id_least_privilege);
@@ -268,10 +268,10 @@ class RecomputeAlbumStatsJobTest extends BasePrecomputingTest
 
 		// Create public and private photos
 		$publicPhoto = Photo::factory()->in($album2)->owned_by($user)->create([
-			'is_starred' => false,
+			'is_highlighted' => false,
 		]);
 		$nsfwPhoto = Photo::factory()->in($album3)->owned_by($user)->create([
-			'is_starred' => true,
+			'is_highlighted' => true,
 		]);
 
 		// Run job
@@ -306,10 +306,10 @@ class RecomputeAlbumStatsJobTest extends BasePrecomputingTest
 
 		// Create public and private photos
 		$publicPhoto = Photo::factory()->in($album2)->owned_by($user)->create([
-			'is_starred' => false,
+			'is_highlighted' => false,
 		]);
 		$nsfwPhoto = Photo::factory()->in($album3)->owned_by($user)->create([
-			'is_starred' => true,
+			'is_highlighted' => true,
 		]);
 
 		// Run job

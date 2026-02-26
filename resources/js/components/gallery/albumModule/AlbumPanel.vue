@@ -8,8 +8,7 @@
 			@toggle-edit="emits('toggleEdit')"
 			@open-search="emits('openSearch')"
 			@go-back="emits('goBack')"
-			@show-starred-images="albumCallbacks.toggleStarred()"
-			@show-selected="albumCallbacks.copyStarred()"
+			@show-selected="albumCallbacks.copyHighlighted()"
 		/>
 		<template v-if="albumStore.album && albumStore.config && userStore.isLoaded">
 			<div id="galleryView" class="relative flex flex-wrap content-start w-full justify-start overflow-y-auto h-full select-none">
@@ -35,6 +34,8 @@
 					@open-statistics="toggleStatistics"
 					@toggle-slide-show="emits('toggleSlideShow')"
 					@scroll-to-pictures="albumCallbacks.scrollToPaginatorTop"
+					@toggle-apply-renamer="toggleApplyRenamer"
+					@toggle-watermark-confirm="toggleWatermarkConfirm"
 				/>
 				<template v-if="is_se_enabled && userStore.isLoggedIn">
 					<AlbumStatistics
@@ -102,6 +103,14 @@
 				<GalleryFooter v-once />
 			</div>
 			<ShareAlbum :key="`share_modal_${albumStore.album.id}`" v-model:visible="is_share_album_visible" :title="albumStore.album.title" />
+			<ApplyRenamerDialog
+				v-model:visible="is_apply_renamer_visible"
+				:album-id="albumStore.album.id"
+				:photo-ids="selectedPhotosIds"
+				:album-ids="selectedAlbumsIds"
+				@applied="emits('refresh')"
+			/>
+			<WatermarkConfirmDialog v-model:visible="is_watermark_confirm_visible" :album-id="albumStore.album.id" @watermarked="emits('refresh')" />
 
 			<!-- Dialogs -->
 			<ContextMenu ref="menu" :model="Menu" :class="Menu.length === 0 ? 'hidden' : ''">
@@ -154,6 +163,8 @@ import { useUserStore } from "@/stores/UserState";
 import { useLayoutStore } from "@/stores/LayoutState";
 import { useCatalogStore } from "@/stores/CatalogState";
 import BuyMeDialog from "@/components/forms/gallery-dialogs/BuyMeDialog.vue";
+import ApplyRenamerDialog from "@/components/forms/album/ApplyRenamerDialog.vue";
+import WatermarkConfirmDialog from "@/components/forms/album/WatermarkConfirmDialog.vue";
 import { useToast } from "primevue/usetoast";
 import Pagination from "@/components/pagination/Pagination.vue";
 import { trans } from "laravel-vue-i18n";
@@ -198,8 +209,13 @@ const {
 	toggleShareAlbum,
 	toggleEmbedCode,
 	toggleTag,
+	toggleLicense,
 	toggleCopy,
 	toggleUpload,
+	toggleApplyRenamer,
+	is_apply_renamer_visible,
+	toggleWatermarkConfirm,
+	is_watermark_confirm_visible,
 } = useGalleryModals(togglableStore);
 
 const { toggleBuyMe } = useBuyMeActions(albumStore, photosStore, orderManagement, catalogStore, toast);
@@ -238,23 +254,23 @@ const albumPanelConfig = computed<AlbumThumbConfig>(() => ({
 
 const photoCallbacks = {
 	star: () => {
-		PhotoService.star(selectedPhotosIds.value, true);
+		PhotoService.highlight(selectedPhotosIds.value, true);
 		// Update the photos in the store immediately to reflect the change
 		selectedPhotosIds.value.forEach((photoId) => {
 			const photo = photosStore.photos.find((p) => p.id === photoId);
 			if (photo) {
-				photo.is_starred = true;
+				photo.is_highlighted = true;
 			}
 		});
 		AlbumService.clearCache(albumStore.album?.id);
 	},
 	unstar: () => {
-		PhotoService.star(selectedPhotosIds.value, false);
+		PhotoService.highlight(selectedPhotosIds.value, false);
 		// Update the photos in the store immediately to reflect the change
 		selectedPhotosIds.value.forEach((photoId) => {
 			const photo = photosStore.photos.find((p) => p.id === photoId);
 			if (photo) {
-				photo.is_starred = false;
+				photo.is_highlighted = false;
 			}
 		});
 		AlbumService.clearCache(albumStore.album?.id);
@@ -305,6 +321,7 @@ const photoCallbacks = {
 		AlbumService.clearCache(albumStore.album.id);
 	},
 	toggleTag: toggleTag,
+	toggleLicense: toggleLicense,
 	toggleRename: toggleRename,
 	toggleCopyTo: toggleCopy,
 	toggleMove: toggleMove,
@@ -312,6 +329,7 @@ const photoCallbacks = {
 	toggleDownload: () => {
 		PhotoService.download(selectedPhotosIds.value, getParentId());
 	},
+	toggleApplyRenamer: toggleApplyRenamer,
 };
 
 function togglePin() {
@@ -349,21 +367,10 @@ const albumCallbacks = {
 		AlbumService.download(selectedAlbumsIds.value);
 	},
 	togglePin: togglePin,
-	toggleStarred: () => {
-		if (!albumStore.album?.id) return;
-		if (albumStore.showStarredOnly) {
-			albumStore.setShowStarredOnly(false);
-			photosStore.setPhotoRatingFilter(null);
-		} else {
-			albumStore.setShowStarredOnly(true);
-			photosStore.setPhotoRatingFilter("starred");
-		}
-
-		unselect();
-	},
-	copyStarred: () => {
-		const starred = photosStore.photos.filter((p) => p.is_starred);
-		const selectedNames = starred
+	toggleApplyRenamer: toggleApplyRenamer,
+	copyHighlighted: () => {
+		const highlighted = photosStore.photos.filter((p) => p.is_highlighted);
+		const selectedNames = highlighted
 			.map((p) => {
 				const dotIndex = p.title.lastIndexOf(".");
 				return dotIndex > 0 ? p.title.substring(0, dotIndex) : p.title;

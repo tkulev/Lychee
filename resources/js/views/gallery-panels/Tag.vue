@@ -14,7 +14,7 @@
 		@rotate-photo-c-w="rotatePhotoCW"
 		@rotate-photo-c-c-w="rotatePhotoCCW"
 		@set-album-header="setAlbumHeader"
-		@toggle-star="toggleStar"
+		@toggle-star="toggleHighlight"
 		@toggle-move="toggleMove"
 		@toggle-delete="toggleDelete"
 		@updated="refresh"
@@ -36,6 +36,18 @@
 			:photo="selectedPhoto"
 			:photo-ids="selectedPhotosIds"
 			@tagged="
+				() => {
+					unselect();
+					refresh();
+				}
+			"
+		/>
+		<PhotoLicenseDialog
+			v-model:visible="is_license_visible"
+			:parent-id="undefined"
+			:photo="selectedPhoto"
+			:photo-ids="selectedPhotosIds"
+			@licensed="
 				() => {
 					unselect();
 					refresh();
@@ -96,6 +108,7 @@ import MoveDialog from "@/components/forms/gallery-dialogs/MoveDialog.vue";
 import RenameDialog from "@/components/forms/gallery-dialogs/RenameDialog.vue";
 import PhotoCopyDialog from "@/components/forms/photo/PhotoCopyDialog.vue";
 import PhotoTagDialog from "@/components/forms/photo/PhotoTagDialog.vue";
+import PhotoLicenseDialog from "@/components/forms/photo/PhotoLicenseDialog.vue";
 import PhotoPanel from "@/components/gallery/photoModule/PhotoPanel.vue";
 import TagPanel from "@/components/gallery/tagModule/TagPanel.vue";
 import LoadingProgress from "@/components/loading/LoadingProgress.vue";
@@ -159,10 +172,10 @@ const { is_photo_edit_open, are_details_open, is_slideshow_active } = storeToRef
 
 const { setScroll } = useScrollable(togglableStore, tagStringId);
 
-const { is_delete_visible, toggleDelete, is_move_visible, toggleMove, is_rename_visible, is_tag_visible, is_copy_visible } =
+const { is_delete_visible, toggleDelete, is_move_visible, toggleMove, is_rename_visible, is_tag_visible, is_license_visible, is_copy_visible } =
 	useGalleryModals(togglableStore);
 
-const { toggleStar, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, nullId, toast, lycheeStore);
+const { toggleHighlight, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, nullId, toast, lycheeStore);
 
 const { getNext, getPrevious } = getNextPreviousPhoto(router, photoStore);
 const { slideshow, next, previous, stop } = useSlideshowFunction(1000, is_slideshow_active, slideshow_timeout, videoElement, getNext, getPrevious);
@@ -231,7 +244,7 @@ onKeyStroke(["Delete", "Backspace"], () => !shouldIgnoreKeystroke() && !photoSto
 // Priviledged Photo operations
 // onKeyStroke("m", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleMove());
 // onKeyStroke("e", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleEdit());
-// onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleStar());
+// onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleHighlight());
 onKeyStroke(["Delete", "Backspace"], () => !shouldIgnoreKeystroke() && photoStore.isLoaded && toggleDelete());
 
 // on key stroke escape:

@@ -13,22 +13,15 @@ use App\Policies\PhotoPolicy;
 use Illuminate\Support\Facades\Gate;
 
 /**
- * Determines if the user is authorized to modify star selection of the designated photos.
+ * Determines if the user is authorized to modify the designated photos ids.
  */
-trait AuthorizeCanStarPhotosTrait
+trait AuthorizeCanEditPhotosByIdTrait
 {
 	/**
 	 * {@inheritDoc}
 	 */
 	public function authorize(): bool
 	{
-		/** @var Photo $photo */
-		foreach ($this->photos as $photo) {
-			if (!Gate::check(PhotoPolicy::CAN_STAR, $photo)) {
-				return false;
-			}
-		}
-
-		return true;
+		return Gate::check(PhotoPolicy::CAN_EDIT_ID, [Photo::class, $this->photo_ids]);
 	}
 }

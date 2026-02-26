@@ -31,7 +31,7 @@ class PhotoPolicy extends BasePolicy
 	public const CAN_DELETE_BY_ID = 'canDeleteById';
 	public const CAN_READ_METRICS = 'canReadMetrics';
 	public const CAN_READ_RATINGS = 'canReadRatings';
-	public const CAN_STAR = 'canStar';
+	public const CAN_HIGHLIGHT = 'canHighlight';
 
 	/**
 	 * @throws FrameworkException
@@ -261,11 +261,11 @@ class PhotoPolicy extends BasePolicy
 	}
 
 	/**
-	 * Checks whether the photo can be starred by the current user.
+	 * Checks whether the photo can be highlighted by the current user.
 	 *
-	 * A photo is called _starred_ if the current user is allowed to star
+	 * A photo is called _highlighted_ if the current user is allowed to star
 	 * the photo.
-	 * A photo can be _starred_ if any of the following conditions hold
+	 * A photo can be _highlighted_ if any of the following conditions hold
 	 * (OR-clause)
 	 *
 	 * - the settings is set to allow anonymous users to star photos
@@ -279,7 +279,7 @@ class PhotoPolicy extends BasePolicy
 	 *
 	 * @return bool
 	 */
-	public function canStar(?User $user, Photo $photo): bool
+	public function canHighlight(?User $user, Photo $photo): bool
 	{
 		$config_manager = app(ConfigManager::class);
 		$visibility = $config_manager->getValueAsEnum('photos_star_visibility', PhotoHighlightVisibilityType::class);

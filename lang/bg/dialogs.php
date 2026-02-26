@@ -121,6 +121,7 @@ return [
         'uploading' => 'Качване',
         'finished' => 'Завършено',
         'failed_error' => 'Качването не бе успешно. Сървърът върна грешка!',
+        'apply_watermark' => 'Apply watermark',
     ],
     'visibility' => [
         'public' => 'Публичен',
@@ -212,6 +213,13 @@ return [
         'updated' => 'Таговете са обновени!',
         'tags_override_info' => 'Ако това не е отметнато, таговете ще бъдат добавени към съществуващите тагове на снимката.',
     ],
+    'photo_license' => [
+        'question' => 'Select a license for this photo.',
+        'question_multiple' => 'Select a license for all %d selected photos.',
+        'select_license' => 'Select License',
+        'set_license' => 'Set License',
+        'updated' => 'License updated!',
+    ],
     'photo_copy' => [
         'no_albums' => 'Няма албуми за копиране',
         'copy_to' => 'Копирай %s в:',
@@ -255,5 +263,30 @@ return [
     ],
     'selected_images' => [
         'names_copied' => 'Имената на избраните изображения бяха копирани!',
+    ],
+    'apply_renamer' => [
+        'title' => 'Apply Renamer Rules',
+        'description' => 'Select the renamer rules to apply and configure the scope.',
+        'no_rules' => 'No renamer rules found.',
+        'target' => 'Target',
+        'scope' => 'Scope',
+        'photos' => 'Photos',
+        'albums' => 'Albums',
+        'current' => 'Current',
+        'descendants' => 'Descendants',
+        'preview' => 'Preview',
+        'preview_title' => 'Preview Changes',
+        'no_changes' => 'No changes detected.',
+        'original' => 'Original',
+        'new_title' => 'New Title',
+        'count_changes' => ':count item(s) will be renamed.',
+        'back' => 'Back',
+        'apply' => 'Apply',
+        'success' => 'Renamer rules applied successfully!',
+    ],
+    'watermark_confirm' => [
+        'title' => 'Apply Watermark',
+        'description' => 'Are you sure you want to apply a watermark to the photos in this album? This action cannot be undone.',
+        'confirm' => 'Apply Watermark',
     ],
 ];

@@ -121,6 +121,7 @@ return [
         'uploading' => 'Uploading',
         'finished' => 'Finished',
         'failed_error' => 'Upload failed. The server returned an error!',
+        'apply_watermark' => 'Apply watermark',
     ],
     'visibility' => [
         'public' => 'Public',
@@ -212,6 +213,13 @@ return [
         'updated' => 'Tags updated!',
         'tags_override_info' => 'If this is unchecked, the tags will be added to the existing tags of the photo.',
     ],
+    'photo_license' => [
+        'question' => 'Select a license for this photo.',
+        'question_multiple' => 'Select a license for all %d selected photos.',
+        'select_license' => 'Select License',
+        'set_license' => 'Set License',
+        'updated' => 'License updated!',
+    ],
     'photo_copy' => [
         'no_albums' => 'No albums to copy to',
         'copy_to' => 'Copy %s to:',
@@ -255,5 +263,30 @@ return [
     ],
     'selected_images' => [
         'names_copied' => 'The names of the selected images have been copied!',
+    ],
+    'apply_renamer' => [
+        'title' => 'Apply Renamer Rules',
+        'description' => 'Select the renamer rules to apply and configure the scope.',
+        'no_rules' => 'No renamer rules found.',
+        'target' => 'Target',
+        'scope' => 'Scope',
+        'photos' => 'Photos',
+        'albums' => 'Albums',
+        'current' => 'Current',
+        'descendants' => 'Descendants',
+        'preview' => 'Preview',
+        'preview_title' => 'Preview Changes',
+        'no_changes' => 'No changes detected.',
+        'original' => 'Original',
+        'new_title' => 'New Title',
+        'count_changes' => ':count item(s) will be renamed.',
+        'back' => 'Back',
+        'apply' => 'Apply',
+        'success' => 'Renamer rules applied successfully!',
+    ],
+    'watermark_confirm' => [
+        'title' => 'Apply Watermark',
+        'description' => 'Are you sure you want to apply a watermark to the photos in this album? This action cannot be undone.',
+        'confirm' => 'Apply Watermark',
     ],
 ];

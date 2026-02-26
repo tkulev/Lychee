@@ -39,7 +39,7 @@ declare namespace App.Enum {
 		| "title_strict"
 		| "description_strict"
 		| "taken_at"
-		| "is_starred"
+		| "is_highlighted"
 		| "type"
 		| "rating_avg";
 	export type ColumnSortingType =
@@ -52,7 +52,7 @@ declare namespace App.Enum {
 		| "min_taken_at"
 		| "max_taken_at"
 		| "taken_at"
-		| "is_starred"
+		| "is_highlighted"
 		| "type"
 		| "rating_avg";
 	export type ConfigType =
@@ -148,7 +148,7 @@ declare namespace App.Enum {
 	export type SmallLargeType = "small" | "large";
 	export type SmartAlbumType =
 		| "unsorted"
-		| "starred"
+		| "highlighted"
 		| "recent"
 		| "on_this_day"
 		| "untagged"
@@ -526,6 +526,7 @@ declare namespace App.Http.Resources.GalleryConfigs {
 	export type UploadConfig = {
 		upload_processing_limit: number;
 		upload_chunk_size: number;
+		can_watermark_optout: boolean;
 	};
 }
 declare namespace App.Http.Resources.Models {
@@ -682,7 +683,7 @@ declare namespace App.Http.Resources.Models {
 		checksum: string;
 		created_at: string;
 		description: string;
-		is_starred: boolean;
+		is_highlighted: boolean;
 		license: App.Enum.LicenseType;
 		live_photo_checksum: string | null;
 		live_photo_content_id: string | null;
@@ -976,7 +977,7 @@ declare namespace App.Http.Resources.Rights {
 		can_upload: boolean;
 		can_see_live_metrics: boolean;
 		can_import_from_server: boolean;
-		can_star: boolean;
+		can_highlight: boolean;
 	};
 	export type SettingsRightsResource = {
 		can_edit: boolean;
