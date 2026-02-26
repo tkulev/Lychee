@@ -236,7 +236,7 @@ class InitConfig extends Data
 		$this->photos_star_visibility = request()->configs()->getValueAsEnum('photos_star_visibility', PhotoHighlightVisibilityType::class);
 
 		// Enhanced Album Display
-		$this->is_album_enhanced_display_enabled = request()->configs()->getValueAsBool('album_enhanced_display_enable');
+		$this->is_album_enhanced_display_enabled = request()->configs()->getValueAsBool('album_enhanced_display_enabled');
 		$this->album_header_size = request()->configs()->getValueAsEnum('album_header_size', AlbumHeaderSize::class);
 
 		$this->set_supporter_properties();

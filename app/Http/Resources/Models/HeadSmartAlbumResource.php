@@ -36,8 +36,8 @@ class HeadSmartAlbumResource extends Data
 		/** @disregard P1006 */
 		$this->policy = AlbumProtectionPolicy::ofSmartAlbum($smart_album);
 		$this->rights = new AlbumRightsResource($smart_album);
-		$header = $this->getHeader($smart_album);
-		$this->preFormattedData = new PreFormattedAlbumData($smart_album, $header);
+		$url = $this->getHeaderUrl($smart_album);
+		$this->preFormattedData = new PreFormattedAlbumData($smart_album, $url);
 	}
 
 	public static function fromModel(BaseSmartAlbum $smart_album): HeadSmartAlbumResource

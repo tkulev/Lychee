@@ -162,12 +162,20 @@ const POSITION_CLASSES = {
 
 const COLORS = computed(() => {
 	const p = props.album.preFormattedData.palette as Record<string, string> | null;
-	return ["white", "black", p?.color1 ?? "#2563eb", p?.color2 ?? "#dc2626", p?.color3 ?? "#16a34a", p?.color4 ?? "#9333ea", p?.color5 ?? "#ca8a04"];
+	return [
+		"white",
+		"black",
+		p?.colour_1 ?? "#2563eb",
+		p?.colour_2 ?? "#dc2626",
+		p?.colour_3 ?? "#16a34a",
+		p?.colour_4 ?? "#9333ea",
+		p?.colour_5 ?? "#ca8a04",
+	];
 });
 
 const selectedColor = computed(() => COLORS.value[selectedColorIndex.value]);
 
-const COLOR_ENUMS = ["white", "black", "color1", "color2", "color3", "color4", "color5"] as App.Enum.AlbumTitleColor[];
+const COLOR_ENUMS = ["white", "black", "colour_1", "colour_2", "colour_3", "colour_4", "colour_5"] as App.Enum.AlbumTitleColor[];
 
 const POSITION_ENUMS: Record<string, App.Enum.AlbumTitlePosition> = {
 	"top-left": "top_left",

@@ -35,6 +35,7 @@ class HeadAlbumResource extends Data
 	public ?string $track_url;
 	public string $license;
 	public ?string $header_id;
+	/** @var array{x:string,y:string}|null */
 	public ?array $header_photo_focus;
 
 	// children counts (no actual children/photos arrays)
@@ -82,8 +83,8 @@ class HeadAlbumResource extends Data
 		// security
 		$this->policy = AlbumProtectionPolicy::ofBaseAlbum($album);
 		$this->rights = new AlbumRightsResource($album);
-		$header = $this->getHeader($album);
-		$this->preFormattedData = new PreFormattedAlbumData($album, $header);
+		$url = $this->getHeaderUrl($album);
+		$this->preFormattedData = new PreFormattedAlbumData($album, $url);
 		$this->is_pinned = $album->is_pinned;
 
 		if ($this->rights->can_edit) {

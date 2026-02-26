@@ -140,12 +140,14 @@
 							</Select>
 							<label for="header">{{ $t("gallery.album.properties.header") }}</label>
 						</FloatLabel>
+					</div>
+					<div class="h-10 my-2 flex" v-if="header_id && header_id.id !== 'compact'">
 						<FloatLabel variant="on" v-if="header_id && header_id.id !== 'compact'">
 							<Select
-								label-id="albumCoverTitleStyle"
-								v-model="albumCoverTitleStyle"
+								label-id="albumHeaderTitleStyle"
+								v-model="albumHeaderTitleStyle"
 								class="w-62 border-none"
-								:options="albumCoverTitleStyleOptions"
+								:options="albumHeaderTitleStyleOptions"
 								option-label="label"
 								show-clear
 							>
@@ -160,14 +162,14 @@
 									</div>
 								</template>
 							</Select>
-							<label for="albumCoverTitleStyle">{{ $t("gallery.album.title.style") }}</label>
+							<label for="albumHeaderTitleStyle">{{ $t("gallery.album.title.style") }}</label>
 						</FloatLabel>
 						<FloatLabel variant="on" v-if="header_id && header_id.id !== 'compact'">
 							<Select
-								label-id="albumCoverTitlePosition"
-								v-model="albumCoverTitlePosition"
+								label-id="albumHeaderTitlePosition"
+								v-model="albumHeaderTitlePosition"
 								class="w-62 border-none"
-								:options="albumCoverTitlePositionOptions"
+								:options="albumHeaderTitlePositionOptions"
 								option-label="label"
 								show-clear
 							>
@@ -182,7 +184,7 @@
 									</div>
 								</template>
 							</Select>
-							<label for="albumCoverTitlePosition">{{ $t("gallery.album.title.position") }}</label>
+							<label for="albumHeaderTitlePosition">{{ $t("gallery.album.title.position") }}</label>
 						</FloatLabel>
 					</div>
 					<div class="h-10 my-2">
@@ -348,8 +350,8 @@ import {
 	SelectBuilders,
 	timelinePhotoGranularityOptions,
 	timelineAlbumGranularityOptions,
-	albumCoverTitlePositionOptions,
-	albumCoverTitleStyleOptions,
+	albumHeaderTitlePositionOptions,
+	albumHeaderTitleStyleOptions,
 } from "@/config/constants";
 import { useToast } from "primevue/usetoast";
 import { trans } from "laravel-vue-i18n";
@@ -381,8 +383,8 @@ const photoSortingColumn = ref<SelectOption<App.Enum.ColumnSortingPhotoType> | u
 const photoSortingOrder = ref<SelectOption<App.Enum.OrderSortingType> | undefined>(undefined);
 const albumSortingColumn = ref<SelectOption<App.Enum.ColumnSortingAlbumType> | undefined>(undefined);
 const albumSortingOrder = ref<SelectOption<App.Enum.OrderSortingType> | undefined>(undefined);
-const albumCoverTitleStyle = ref<SelectOption<App.Enum.AlbumTitleColor> | undefined>(undefined);
-const albumCoverTitlePosition = ref<SelectOption<App.Enum.AlbumTitlePosition> | undefined>(undefined);
+const albumHeaderTitleStyle = ref<SelectOption<App.Enum.AlbumTitleColor> | undefined>(undefined);
+const albumHeaderTitlePosition = ref<SelectOption<App.Enum.AlbumTitlePosition> | undefined>(undefined);
 const photoLayout = ref<SelectOption<App.Enum.PhotoLayoutType> | undefined>(undefined);
 const photoTimeline = ref<SelectOption<App.Enum.TimelinePhotoGranularity> | undefined>(undefined);
 const albumTimeline = ref<SelectOption<App.Enum.TimelineAlbumGranularity> | undefined>(undefined);
@@ -461,8 +463,8 @@ function load(editable: App.Http.Resources.Editable.EditableBaseAlbumResource, p
 	header_id.value = buildHeaderId(editable.header_id, photos);
 	tags.value = editable.tags;
 	is_and.value = editable.is_and ?? false;
-	albumCoverTitleStyle.value = SelectBuilders.buildAlbumCoverTitleStyle(editable.title_color ?? undefined);
-	albumCoverTitlePosition.value = SelectBuilders.buildAlbumCoverTitlePosition(editable.title_position ?? undefined);
+	albumHeaderTitleStyle.value = SelectBuilders.buildAlbumHeaderTitleStyle(editable.title_color ?? undefined);
+	albumHeaderTitlePosition.value = SelectBuilders.buildAlbumHeaderTitlePosition(editable.title_position ?? undefined);
 }
 
 onMounted(() => {
@@ -498,8 +500,8 @@ function saveAlbum() {
 		album_timeline: albumTimeline.value?.value ?? null,
 		photo_timeline: photoTimeline.value?.value ?? null,
 		is_pinned: albumStore.tagOrModelAlbum?.editable?.is_pinned ?? false,
-		title_color: albumCoverTitleStyle.value?.value ?? null,
-		title_position: albumCoverTitlePosition.value?.value ?? null,
+		title_color: albumHeaderTitleStyle.value?.value ?? null,
+		title_position: albumHeaderTitlePosition.value?.value ?? null,
 		header_photo_focus: albumStore.tagOrModelAlbum?.editable?.header_photo_focus ?? null,
 	};
 	AlbumService.updateAlbum(data).then(() => {

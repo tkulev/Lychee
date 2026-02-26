@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch, nextTick } from "vue";
 import { FocusPicker } from "image-focus";
 
 const props = defineProps<{
@@ -49,13 +49,21 @@ const emit = defineEmits<{
 const imageRef = ref<HTMLImageElement | null>(null);
 const pickerInstance = ref<FocusPicker | null>(null);
 
+function destroyPicker() {
+	if (pickerInstance.value) {
+		pickerInstance.value.stopListening();
+		pickerInstance.value = null;
+	}
+	if (imageRef.value) {
+		imageRef.value.removeEventListener("load", initializePicker);
+	}
+}
+
 function initializePicker() {
 	if (!imageRef.value) return;
 
-	// If already initialized, do nothing or destroy/re-create?
-	// image-focus doesn't seem to have a destroy method in types, but we should check.
-	// For now, avoid re-initializing if instance exists.
-	if (pickerInstance.value) return;
+	// Destroy any existing instance safely before re-initializing
+	destroyPicker();
 
 	const initialFocus = {
 		x: props.focusX ?? 0,
@@ -74,26 +82,33 @@ function initializePicker() {
 	}
 }
 
-onMounted(() => {
+function setupPicker() {
 	if (imageRef.value?.complete) {
 		initializePicker();
 	} else {
 		imageRef.value?.addEventListener("load", initializePicker);
 	}
+}
+
+onMounted(() => {
+	setupPicker();
 });
 
 onUnmounted(() => {
-	if (imageRef.value) {
-		imageRef.value.removeEventListener("load", initializePicker);
-	}
-	// Attempt to clean up if supported, otherwise just clear ref
-	pickerInstance.value = null;
+	destroyPicker();
 });
 
 watch(
 	() => props.src,
-	() => {
-		// Re-init if src changes?
+	async () => {
+		// Clean up old instance
+		destroyPicker();
+
+		// Wait for Vue to update the DOM with the new src image
+		await nextTick();
+
+		// Re-initialize picker with new image
+		setupPicker();
 	},
 );
 </script>

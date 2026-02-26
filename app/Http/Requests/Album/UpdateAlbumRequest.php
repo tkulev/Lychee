@@ -196,9 +196,7 @@ class UpdateAlbumRequest extends BaseApiRequest implements HasAlbum, HasTitle, H
 		$this->title_color = $values[RequestAttribute::ALBUM_TITLE_COLOR_ATTRIBUTE] === null ? null : AlbumTitleColor::tryFrom($values[RequestAttribute::ALBUM_TITLE_COLOR_ATTRIBUTE]);
 		$this->title_position = $values[RequestAttribute::ALBUM_TITLE_POSITION_ATTRIBUTE] === null ? null : AlbumTitlePosition::tryFrom($values[RequestAttribute::ALBUM_TITLE_POSITION_ATTRIBUTE]);
 
-		if (array_key_exists(RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE, $values)) {
-			$this->header_photo_focus = $values[RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE];
-		}
+		$this->header_photo_focus = $values[RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE] ?? null;
 
 		$this->copyright = $values[RequestAttribute::COPYRIGHT_ATTRIBUTE];
 

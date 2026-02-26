@@ -12,9 +12,9 @@ enum AlbumTitleColor: string
 {
 	case WHITE = 'white';
 	case BLACK = 'black';
-	case COLOR1 = 'color1';
-	case COLOR2 = 'color2';
-	case COLOR3 = 'color3';
-	case COLOR4 = 'color4';
-	case COLOR5 = 'color5';
+	case COLOUR_1 = 'colour_1';
+	case COLOUR_2 = 'colour_2';
+	case COLOUR_3 = 'colour_3';
+	case COLOUR_4 = 'colour_4';
+	case COLOUR_5 = 'colour_5';
 }

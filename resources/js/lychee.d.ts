@@ -17,7 +17,7 @@ declare namespace App.Enum {
 	export type AlbumDecorationType = "none" | "layers" | "album" | "photo" | "all";
 	export type AlbumHeaderSize = "half_screen" | "full_screen";
 	export type AlbumLayoutType = "list" | "grid";
-	export type AlbumTitleColor = "white" | "black" | "color1" | "color2" | "color3" | "color4" | "color5";
+	export type AlbumTitleColor = "white" | "black" | "colour_1" | "colour_2" | "colour_3" | "colour_4" | "colour_5";
 	export type AlbumTitlePosition = "top_left" | "top_right" | "bottom_left" | "bottom_right" | "center";
 	export type AspectRatioCSSType = "aspect-5x4" | "aspect-4x5" | "aspect-3x2" | "aspect-square" | "aspect-2x3" | "aspect-video";
 	export type AspectRatioType = "5/4" | "3/2" | "1/1" | "2/3" | "4/5" | "16/9";

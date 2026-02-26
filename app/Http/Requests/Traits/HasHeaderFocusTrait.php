@@ -10,10 +10,13 @@ namespace App\Http\Requests\Traits;
 
 trait HasHeaderFocusTrait
 {
+	/**
+	 * @var array{x:string,y:string}|null
+	 */
 	protected ?array $header_photo_focus = null;
 
 	/**
-	 * @return array|null
+	 * @return array{x:string,y:string}|null
 	 */
 	public function headerPhotoFocus(): ?array
 	{

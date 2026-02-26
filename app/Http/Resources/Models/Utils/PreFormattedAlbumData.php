@@ -11,10 +11,9 @@ namespace App\Http\Resources\Models\Utils;
 use App\Contracts\Models\AbstractAlbum;
 use App\Enum\DateOrderingType;
 use App\Enum\LicenseType;
+use App\Http\Resources\Models\ColourPaletteResource;
 use App\Models\Album;
 use App\Models\Extensions\BaseAlbum;
-use App\Models\Palette;
-use App\Models\SizeVariant;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -35,28 +34,17 @@ class PreFormattedAlbumData extends Data
 	public ?string $description = null;
 	public ?string $copyright = null;
 
-	public ?array $palette = null;
+	public ?ColourPaletteResource $palette = null;
 
 	public ?string $title_color = null;
 	public ?string $title_position = null;
 	public ?array $header_photo_focus = null;
 
-	public function __construct(AbstractAlbum $album, ?SizeVariant $header)
+	public function __construct(AbstractAlbum $album, ?string $url)
 	{
 		$min_max_date_format = request()->configs()->getValueAsString('date_format_hero_min_max');
 		$create_date_format = request()->configs()->getValueAsString('date_format_hero_created_at');
-		$this->url = $header?->url;
-
-		if ($header?->photo?->palette !== null) {
-			$p = $header->photo->palette;
-			$this->palette = [
-				'color1' => Palette::toHex($p->colour_1),
-				'color2' => Palette::toHex($p->colour_2),
-				'color3' => Palette::toHex($p->colour_3),
-				'color4' => Palette::toHex($p->colour_4),
-				'color5' => Palette::toHex($p->colour_5),
-			];
-		}
+		$this->url = $url;
 
 		$this->title = $album->get_title();
 		if ($album instanceof BaseAlbum) {
@@ -74,6 +62,10 @@ class PreFormattedAlbumData extends Data
 			$this->title_color = $album->title_color?->value;
 			$this->title_position = $album->title_position?->value;
 			$this->header_photo_focus = $album->header_photo_focus;
+
+			if ($album->header !== null && $album->header !== null && $album->header->palette !== null) {
+				$this->palette = ColourPaletteResource::fromModel($album->header->palette);
+			}
 		}
 	}
 

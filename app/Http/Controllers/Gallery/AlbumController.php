@@ -296,7 +296,6 @@ class AlbumController extends Controller
 	{
 		$album = $request->album();
 		$album->cover_id = ($album->cover_id === $request->photo()->id) ? null : $request->photo()->id;
-		$album->header_photo_focus = null;
 		$album->save();
 	}
 

@@ -11,7 +11,7 @@ namespace App\Contracts\Http\Requests;
 interface HasHeaderFocus
 {
 	/**
-	 * @return array|null
+	 * @return array{x:string,y:string}|null
 	 */
 	public function headerPhotoFocus(): ?array;
 }

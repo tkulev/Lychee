@@ -197,6 +197,7 @@ class Album extends BaseAlbum implements Node
 		'num_photos' => 'integer',
 		'auto_cover_id_max_privilege' => 'string',
 		'auto_cover_id_least_privilege' => 'string',
+		'is_recursive_nsfw' => 'boolean',
 		'header_photo_focus' => 'array',
 		'album_thumb_aspect_ratio' => AspectRatioType::class,
 		'title_color' => AlbumTitleColor::class,
@@ -444,11 +445,11 @@ class Album extends BaseAlbum implements Node
 	}
 
 	/**
-	 * Get the color palette from the album's cover photo.
+	 * Get the color palette from the album's header photo.
 	 */
-	public function getCoverPalette(): ?Palette
+	public function getHeaderPalette(): ?Palette
 	{
-		return $this->cover?->palette;
+		return $this->header?->palette;
 	}
 
 	/**
@@ -465,34 +466,30 @@ class Album extends BaseAlbum implements Node
 		$value = $this->title_color->value;
 
 		// Handle basic colors
-		if ($value === 'white') {
+		if ($value === AlbumTitleColor::WHITE) {
 			return '#ffffff';
 		}
-		if ($value === 'black') {
+		if ($value === AlbumTitleColor::BLACK) {
 			return '#000000';
 		}
 
 		// Handle palette colors (color1 through color5)
-		if (str_starts_with($value, 'color')) {
-			$palette = $this->getCoverPalette();
+		$palette = $this->getHeaderPalette();
 
-			if ($palette === null) {
-				return '#ffffff';
-			}
-
-			$color = match ($value) {
-				'color1' => $palette->colour_1,
-				'color2' => $palette->colour_2,
-				'color3' => $palette->colour_3,
-				'color4' => $palette->colour_4,
-				'color5' => $palette->colour_5,
-				default => '#ffffff',
-			};
-
-			return $color;
+		if ($palette === null) {
+			return '#ffffff';
 		}
 
-		return '#ffffff';
+		$color = match ($value) {
+			AlbumTitleColor::COLOUR_1 => $palette->colour_1,
+			AlbumTitleColor::COLOUR_2 => $palette->colour_2,
+			AlbumTitleColor::COLOUR_3 => $palette->colour_3,
+			AlbumTitleColor::COLOUR_4 => $palette->colour_4,
+			AlbumTitleColor::COLOUR_5 => $palette->colour_5,
+			default => '#ffffff',
+		};
+
+		return $color;
 	}
 
 	/**

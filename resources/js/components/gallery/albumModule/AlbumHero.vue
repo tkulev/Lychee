@@ -4,11 +4,7 @@
 		:album="albumStore.album"
 		@scroll-to-pictures="emits('scrollToPictures')"
 	/>
-	<Card
-		class="w-full"
-		v-if="albumStore.album"
-		:class="{ '-mt-24 z-10 relative bg-color: var(--p-panel-header-background);': album_header_size !== 'half_screen' }"
-	>
+	<Card class="w-full" v-if="albumStore.album" :class="{ '-mt-24 z-10 relative': album_header_size !== 'half_screen' }">
 		<template #content>
 			<div class="w-full flex flex-row-reverse items-start">
 				<div class="order-1 flex flex-col w-full">

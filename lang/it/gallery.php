@@ -155,8 +155,8 @@ return [
             'all_tags_must_match' => 'All tags must match.',
         ],
         'title' => [
-            'style' => 'Style',
-            'position' => 'Position',
+            'style' => 'Header Title Style',
+            'position' => 'Header Title Position',
             'position_options' => [
                  'top_left' => 'Top Left',
                  'top_right' => 'Top Right',
