@@ -186,6 +186,10 @@ const togglableStore = useTogglablesStateStore();
 const lycheeStore = useLycheeStateStore();
 const orderManagement = useOrderManagementStore();
 
+if (!albumsStore.rootRights) {
+	albumsStore.loadRootRights();
+}
+
 const emits = defineEmits<{
 	refresh: [];
 	toggleEdit: [];
