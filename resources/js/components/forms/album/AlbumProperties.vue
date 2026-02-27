@@ -107,12 +107,12 @@
 							<label for="albumSortingOrder">{{ $t("gallery.album.properties.asc/desc") }}</label>
 						</FloatLabel>
 					</div>
-					<div class="h-10 my-2 flex">
+					<div class="h-10 my-2">
 						<FloatLabel variant="on">
 							<Select
 								label-id="header"
 								v-model="header_id"
-								class="w-90 border-none"
+								class="w-72 border-none"
 								:options="headersOptions"
 								option-label="title"
 								show-clear
