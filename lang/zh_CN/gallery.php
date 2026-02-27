@@ -42,7 +42,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => '未分类',
-        'starred' => '已标星',
+        'highlighted' => '已标星',
         'recent' => '最近',
         'public' => '公开',
         'on_this_day' => '历史上的今天',
@@ -63,6 +63,7 @@ return [
         'masonry' => '等比例瀑布流',
         'grid' => '等比例网格',
         'filmstrip' => '胶片条',
+        'list' => '列表视图',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -96,8 +97,8 @@ return [
     'album' => [
         'header_albums' => '相册',
         'header_photos' => '照片',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => '这里什么都没有',
         'upload' => '上传照片',
         'tabs' => [
@@ -117,6 +118,8 @@ return [
             'share' => '分享相册',
             'embed' => 'Embed Album',
             'stats_only_se' => '统计功能仅在支持者版本中可用',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Number of visits',
@@ -150,8 +153,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => '标星',
-            'unstar' => '取消标星',
+            'highlight' => '标星',
+            'unhighlight' => '取消标星',
             'set_album_header' => '设为相册页眉图片',
             'move' => '移动',
             'delete' => '删除',
@@ -230,12 +233,14 @@ return [
         'consent' => '点击确认查看。',
     ],
     'menus' => [
-        'star' => '标星',
-        'unstar' => '取消标星',
-        'star_all' => '标星所选',
-        'unstar_all' => '取消标星所选',
+        'highlight' => '标星',
+        'unhighlight' => '取消标星',
+        'highlight_all' => '标星所选',
+        'unhighlight_all' => '取消标星所选',
         'tag' => '标签',
         'tag_all' => '为所选添加标签',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => '设为相册封面',
         'remove_header' => '移除相册页眉图片',
         'set_header' => '设置相册页眉图片',
@@ -252,6 +257,8 @@ return [
         'download_all' => '下载所选',
         'merge' => '合并',
         'merge_all' => '合并所选',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => '上传照片',
         'import_link' => '从链接导入',
         'import_server' => 'Import from Server',

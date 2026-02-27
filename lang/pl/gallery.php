@@ -42,7 +42,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Nieposortowane',
-        'starred' => 'Wyróżniony',
+        'highlighted' => 'Wyróżniony',
         'recent' => 'Najnowsze',
         'public' => 'Publiczny',
         'on_this_day' => 'W tym dniu',
@@ -63,6 +63,7 @@ return [
         'masonry' => 'Z aspektem, cegiełki',
         'grid' => 'Z aspektem, siatka',
         'filmstrip' => 'Taśma filmowa',
+        'list' => 'Widok listy',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -96,8 +97,8 @@ return [
     'album' => [
         'header_albums' => 'Albumy',
         'header_photos' => 'Zdjęcia',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'Nie ma tu nic do oglądania',
         'upload' => 'Przesyłanie zdjęć',
         'tabs' => [
@@ -117,6 +118,8 @@ return [
             'share' => 'Udostępnij album',
             'embed' => 'Embed Album',
             'stats_only_se' => 'Statystyki dostępne w Supporter Edition',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Number of visits',
@@ -150,8 +153,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Wyróżnienie',
-            'unstar' => 'Cofnij wyróżnienie',
+            'highlight' => 'Wyróżnienie',
+            'unhighlight' => 'Cofnij wyróżnienie',
             'set_album_header' => 'Ustaw jako nagłówek albumu',
             'move' => 'Przenieś',
             'delete' => 'Usuń',
@@ -230,12 +233,14 @@ return [
         'consent' => 'Kliknij, aby wyrazić zgodę.',
     ],
     'menus' => [
-        'star' => 'Wyróżnienie',
-        'unstar' => 'Cofnij wyróżnienie',
-        'star_all' => 'Wybrano wyróżnienie',
-        'unstar_all' => 'Cofnij wyróżnienie dla zaznaczonych',
+        'highlight' => 'Wyróżnienie',
+        'unhighlight' => 'Cofnij wyróżnienie',
+        'highlight_all' => 'Wybrano wyróżnienie',
+        'unhighlight_all' => 'Cofnij wyróżnienie dla zaznaczonych',
         'tag' => 'Tag',
         'tag_all' => 'Otaguj zaznaczone',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Ustaw okładkę albumu',
         'remove_header' => 'Usuń nagłówek albumu',
         'set_header' => 'Ustawianie nagłówka albumu',
@@ -252,6 +257,8 @@ return [
         'download_all' => 'Pobierz wybrane',
         'merge' => 'Scal',
         'merge_all' => 'Scal wybrane',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Prześlij zdjęcie',
         'import_link' => 'Import z łącza',
         'import_server' => 'Import from Server',

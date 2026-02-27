@@ -24,11 +24,13 @@ export type PhotoCallbacks = {
 	setAsCover: () => void;
 	setAsHeader: () => void;
 	toggleTag: () => void;
+	toggleLicense: () => void;
 	toggleRename: () => void;
 	toggleCopyTo: () => void;
 	toggleMove: () => void;
 	toggleDelete: () => void;
 	toggleDownload: () => void;
+	toggleApplyRenamer: () => void;
 };
 
 export type AlbumCallbacks = {
@@ -39,6 +41,7 @@ export type AlbumCallbacks = {
 	togglePin: () => void;
 	toggleDelete: () => void;
 	toggleDownload: () => void;
+	toggleApplyRenamer: () => void;
 };
 
 type MenuItem = {
@@ -92,19 +95,19 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 		const albumStore = useAlbumStore();
 		const leftMenuStore = useLeftMenuStateStore();
 
-		if (selectedPhoto.is_starred) {
+		if (selectedPhoto.is_highlighted) {
 			menuItems.push({
-				label: "gallery.menus.unstar",
-				icon: "pi pi-star",
+				label: "gallery.menus.unhighlight",
+				icon: "pi pi-flag",
 				callback: photoCallbacks.unstar,
-				access: leftMenuStore.initData?.root_album?.can_star ?? false,
+				access: leftMenuStore.initData?.root_album?.can_highlight ?? false,
 			});
 		} else {
 			menuItems.push({
-				label: "gallery.menus.star",
-				icon: "pi pi-star",
+				label: "gallery.menus.highlight",
+				icon: "pi pi-flag-fill",
 				callback: photoCallbacks.star,
-				access: leftMenuStore.initData?.root_album?.can_star ?? false,
+				access: leftMenuStore.initData?.root_album?.can_highlight ?? false,
 			});
 		}
 
@@ -140,6 +143,18 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 					icon: "pi pi-tag",
 					callback: photoCallbacks.toggleTag,
 					access: albumStore.rights?.can_edit ?? false,
+				},
+				{
+					label: "gallery.menus.license",
+					icon: "pi pi-id-card",
+					callback: photoCallbacks.toggleLicense,
+					access: albumStore.rights?.can_edit ?? false,
+				},
+				{
+					label: "gallery.menus.apply_renamer",
+					icon: "pi pi-pencil",
+					callback: photoCallbacks.toggleApplyRenamer,
+					access: (albumStore.rights?.can_edit ?? false) && (leftMenuStore.initData?.modules.is_mod_renamer_enabled ?? false),
 				},
 				{
 					is_divider: true,
@@ -190,19 +205,21 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 		const menuItems = [];
 		const albumStore = useAlbumStore();
 		const leftMenuStore = useLeftMenuStateStore();
-		if (selectors.selectedPhotos.value.reduce((acc: boolean, photo: App.Http.Resources.Models.PhotoResource) => acc && photo.is_starred, true)) {
+		if (
+			selectors.selectedPhotos.value.reduce((acc: boolean, photo: App.Http.Resources.Models.PhotoResource) => acc && photo.is_highlighted, true)
+		) {
 			menuItems.push({
-				label: "gallery.menus.unstar_all",
-				icon: "pi pi-star",
+				label: "gallery.menus.unhighlight_all",
+				icon: "pi pi-flag",
 				callback: photoCallbacks.unstar,
-				access: leftMenuStore.initData?.root_album?.can_star ?? false,
+				access: leftMenuStore.initData?.root_album?.can_highlight ?? false,
 			});
 		} else {
 			menuItems.push({
-				label: "gallery.menus.star_all",
-				icon: "pi pi-star",
+				label: "gallery.menus.highlight_all",
+				icon: "pi pi-flag-fill",
 				callback: photoCallbacks.star,
-				access: leftMenuStore.initData?.root_album?.can_star ?? false,
+				access: leftMenuStore.initData?.root_album?.can_highlight ?? false,
 			});
 		}
 
@@ -213,6 +230,18 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 					icon: "pi pi-tag",
 					callback: photoCallbacks.toggleTag,
 					access: albumStore.rights?.can_edit ?? false,
+				},
+				{
+					label: "gallery.menus.license_all",
+					icon: "pi pi-id-card",
+					callback: photoCallbacks.toggleLicense,
+					access: albumStore.rights?.can_edit ?? false,
+				},
+				{
+					label: "gallery.menus.apply_renamer_all",
+					icon: "pi pi-pencil",
+					callback: photoCallbacks.toggleApplyRenamer,
+					access: (albumStore.rights?.can_edit ?? false) && (leftMenuStore.initData?.modules.is_mod_renamer_enabled ?? false),
 				},
 				{
 					is_divider: true,
@@ -255,6 +284,7 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 
 		const menuItems = [];
 		const selectedAlbum = selectors.selectedAlbum.value as App.Http.Resources.Models.ThumbAlbumResource;
+		const leftMenuStore = useLeftMenuStateStore();
 
 		if (selectors.config?.value?.is_model_album) {
 			menuItems.push({
@@ -272,6 +302,12 @@ export function useContextMenu(selectors: Selectors, photoCallbacks: PhotoCallba
 					icon: "pi pi-pen-to-square",
 					callback: albumCallbacks.toggleRename,
 					access: selectedAlbum.rights.can_edit ?? false,
+				},
+				{
+					label: "gallery.menus.apply_renamer",
+					icon: "pi pi-pencil",
+					callback: albumCallbacks.toggleApplyRenamer,
+					access: (selectedAlbum.rights.can_edit ?? false) && (leftMenuStore.initData?.modules.is_mod_renamer_enabled ?? false),
 				},
 				{
 					label: "gallery.menus.merge",

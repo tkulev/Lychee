@@ -42,7 +42,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Sin clasificar',
-        'starred' => 'Sembrado de estrellas',
+        'highlighted' => 'Sembrado de estrellas',
         'recent' => 'Reciente',
         'public' => 'Público',
         'on_this_day' => 'En este día',
@@ -63,6 +63,7 @@ return [
         'masonry' => 'Con aspecto, mampostería',
         'grid' => 'Con aspecto, cuadrícula',
         'filmstrip' => 'Tira de película',
+        'list' => 'Vista de lista',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -96,8 +97,8 @@ return [
     'album' => [
         'header_albums' => 'Álbumes',
         'header_photos' => 'Fotos',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'No hay nada que ver aquí',
         'upload' => 'Subir fotos',
         'tabs' => [
@@ -117,6 +118,8 @@ return [
             'share' => 'Compartir álbum',
             'embed' => 'Embed Album',
             'stats_only_se' => 'Estadísticas disponibles en la Supporter Edition',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Número de visitas',
@@ -150,8 +153,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Marcar',
-            'unstar' => 'Desmarcar',
+            'highlight' => 'Marcar',
+            'unhighlight' => 'Desmarcar',
             'set_album_header' => 'Establecer como encabezado de álbum',
             'move' => 'Mover',
             'delete' => 'Borrar',
@@ -230,12 +233,14 @@ return [
         'consent' => 'Toque para dar su consentimiento.',
     ],
     'menus' => [
-        'star' => 'Marcar',
-        'unstar' => 'Desmarcar',
-        'star_all' => 'Marcar seleccionado',
-        'unstar_all' => 'Desmarcar seleccionado',
+        'highlight' => 'Marcar',
+        'unhighlight' => 'Desmarcar',
+        'highlight_all' => 'Marcar seleccionado',
+        'unhighlight_all' => 'Desmarcar seleccionado',
         'tag' => 'Etiqueta',
         'tag_all' => 'Etiqueta seleccionada',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Establecer la portada del álbum',
         'remove_header' => 'Eliminar encabezado del álbum',
         'set_header' => 'Establecer encabezado de álbum',
@@ -252,6 +257,8 @@ return [
         'download_all' => 'Descargar seleccionado',
         'merge' => 'Unir',
         'merge_all' => 'Fusionar seleccionados',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Subir foto',
         'import_link' => 'Importar desde el enlace',
         'import_server' => 'Importar desde el servidor',

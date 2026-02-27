@@ -41,7 +41,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'غير مصنف',
-        'starred' => 'المميزة',
+        'highlighted' => 'المميزة',
         'recent' => 'الأحدث',
         'public' => 'عام',
         'on_this_day' => 'في هذا اليوم',
@@ -62,6 +62,7 @@ return [
         'masonry' => 'مع النسبة، متراص',
         'grid' => 'مع النسبة، شبكة',
         'filmstrip' => 'شريط فيلم',
+        'list' => 'عرض القائمة',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -95,8 +96,8 @@ return [
     'album' => [
         'header_albums' => 'الألبومات',
         'header_photos' => 'الصور',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'لا يوجد شيء هنا',
         'upload' => 'رفع الصور',
         'tabs' => [
@@ -116,6 +117,8 @@ return [
             'share' => 'مشاركة الألبوم',
             'embed' => 'Embed Album',
             'stats_only_se' => 'الإحصائيات متاحة في إصدار الدعم فقط',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'عدد الزيارات',
@@ -149,8 +152,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'تمييز',
-            'unstar' => 'إلغاء التمييز',
+            'highlight' => 'تمييز',
+            'unhighlight' => 'إلغاء التمييز',
             'set_album_header' => 'تعيين كعنوان ألبوم',
             'move' => 'نقل',
             'delete' => 'حذف',
@@ -229,12 +232,14 @@ return [
         'consent' => 'اضغط للموافقة.',
     ],
     'menus' => [
-        'star' => 'تمييز',
-        'unstar' => 'إلغاء التمييز',
-        'star_all' => 'تمييز المحدد',
-        'unstar_all' => 'إلغاء تمييز المحدد',
+        'highlight' => 'تمييز',
+        'unhighlight' => 'إلغاء التمييز',
+        'highlight_all' => 'تمييز المحدد',
+        'unhighlight_all' => 'إلغاء تمييز المحدد',
         'tag' => 'علامة',
         'tag_all' => 'تعيين علامة للمحدد',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'تعيين غلاف الألبوم',
         'remove_header' => 'إزالة رأس الألبوم',
         'set_header' => 'تعيين رأس الألبوم',
@@ -251,6 +256,8 @@ return [
         'download_all' => 'تنزيل المحدد',
         'merge' => 'دمج',
         'merge_all' => 'دمج المحدد',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'رفع صورة',
         'import_link' => 'استيراد من الرابط',
         'import_server' => 'Import from Server',

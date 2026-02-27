@@ -41,7 +41,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'مرتب نشده',
-        'starred' => 'ستاره‌دار',
+        'highlighted' => 'ستاره‌دار',
         'recent' => 'اخیر',
         'public' => 'عمومی',
         'on_this_day' => 'در این روز',
@@ -62,6 +62,7 @@ return [
         'masonry' => 'با نسبت، آجری',
         'grid' => 'با نسبت، شبکه‌ای',
         'filmstrip' => 'نوار فیلم',
+        'list' => 'نمای فهرست',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -95,8 +96,8 @@ return [
     'album' => [
         'header_albums' => 'آلبوم‌ها',
         'header_photos' => 'عکس‌ها',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'اینجا چیزی برای نمایش نیست',
         'upload' => 'بارگذاری عکس‌ها',
         'tabs' => [
@@ -116,6 +117,8 @@ return [
             'share' => 'اشتراک‌گذاری آلبوم',
             'embed' => 'Embed Album',
             'stats_only_se' => 'آمار فقط در نسخه حامیان در دسترس است',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'تعداد بازدیدها',
@@ -149,8 +152,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'ستاره‌دار',
-            'unstar' => 'بدون ستاره',
+            'highlight' => 'ستاره‌دار',
+            'unhighlight' => 'بدون ستاره',
             'set_album_header' => 'تنظیم به عنوان هدر آلبوم',
             'move' => 'انتقال',
             'delete' => 'حذف',
@@ -229,12 +232,14 @@ return [
         'consent' => 'برای تأیید لمس کنید.',
     ],
     'menus' => [
-        'star' => 'ستاره‌دار',
-        'unstar' => 'بدون ستاره',
-        'star_all' => 'ستاره‌دار کردن انتخاب شده‌ها',
-        'unstar_all' => 'حذف ستاره از انتخاب شده‌ها',
+        'highlight' => 'ستاره‌دار',
+        'unhighlight' => 'بدون ستاره',
+        'highlight_all' => 'ستاره‌دار کردن انتخاب شده‌ها',
+        'unhighlight_all' => 'حذف ستاره از انتخاب شده‌ها',
         'tag' => 'برچسب',
         'tag_all' => 'برچسب‌گذاری انتخاب شده‌ها',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'تنظیم جلد آلبوم',
         'remove_header' => 'حذف هدر آلبوم',
         'set_header' => 'تنظیم هدر آلبوم',
@@ -251,6 +256,8 @@ return [
         'download_all' => 'دانلود انتخاب شده‌ها',
         'merge' => 'ادغام',
         'merge_all' => 'ادغام انتخاب شده‌ها',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'بارگذاری عکس',
         'import_link' => 'وارد کردن از لینک',
         'import_server' => 'Import from Server',

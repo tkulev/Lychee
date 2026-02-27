@@ -17,18 +17,8 @@
 
 		<template #end>
 			<Button
-				v-if="is_se_enabled && (albumsStore.rootRights?.can_star || albumStore.album.rights?.can_edit)"
-				v-tooltip.bottom="$t('gallery.album.show_starred')"
-				:icon="albumStore.showStarredOnly ? 'pi pi-star-fill' : 'pi pi-star'"
-				:label="String(photosStore.starredPhotosCount)"
-				class="border-none hover:text-color"
-				severity="secondary"
-				text
-				@click="emits('showStarredImages')"
-			/>
-			<Button
 				v-if="is_se_enabled && albumStore.album.rights?.can_edit"
-				v-tooltip.bottom="$t('gallery.album.copy_starred_names')"
+				v-tooltip.bottom="$t('gallery.album.copy_highlighted_names')"
 				icon="pi pi-copy"
 				class="border-none hover:text-color"
 				severity="secondary"
@@ -101,16 +91,12 @@ import GoBack from "./GoBack.vue";
 import { onMounted } from "vue";
 import { useAlbumStore } from "@/stores/AlbumState";
 import { useOrderManagementStore } from "@/stores/OrderManagement";
-import { usePhotosStore } from "@/stores/PhotosState";
-import { useAlbumsStore } from "@/stores/AlbumsState";
 
 const togglableStore = useTogglablesStateStore();
 const lycheeStore = useLycheeStateStore();
 const favourites = useFavouriteStore();
 const albumStore = useAlbumStore();
 const orderManagementStore = useOrderManagementStore();
-const photosStore = usePhotosStore();
-const albumsStore = useAlbumsStore();
 
 const { dropbox_api_key, is_favourite_enabled, is_se_enabled } = storeToRefs(lycheeStore);
 const { is_album_edit_open, is_full_screen } = storeToRefs(togglableStore);
@@ -122,7 +108,6 @@ const emits = defineEmits<{
 	toggleEdit: [];
 	goBack: [];
 	openSearch: [];
-	showStarredImages: [];
 	showSelected: [];
 }>();
 

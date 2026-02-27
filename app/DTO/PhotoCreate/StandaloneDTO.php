@@ -35,8 +35,8 @@ class StandaloneDTO implements PhotoDTO
 		public Photo $photo,
 		// The original photo source file that is imported.
 		public readonly NativeLocalFile $source_file,
-		// Indicates whether the new photo shall be starred.
-		public readonly bool $is_starred,
+		// Indicates whether the new photo shall be highlighted.
+		public readonly bool $is_highlighted,
 		// The extracted EXIF information (populated during init phase).
 		public readonly Extractor $exif_info,
 		// The intended parent album
@@ -46,6 +46,8 @@ class StandaloneDTO implements PhotoDTO
 		public readonly bool $shall_import_via_symlink,
 		public readonly bool $shall_delete_imported,
 		public readonly bool $shall_rename_photo_title,
+		// Whether to apply watermark (null = use global setting, true = force apply, false = skip).
+		public readonly ?bool $apply_watermark,
 	) {
 		$this->tags = new Collection();
 	}
@@ -55,13 +57,14 @@ class StandaloneDTO implements PhotoDTO
 		return new StandaloneDTO(
 			photo: new Photo(),
 			source_file: $init_dto->source_file,
-			is_starred: $init_dto->is_starred,
+			is_highlighted: $init_dto->is_highlighted,
 			exif_info: $init_dto->exif_info,
 			album: $init_dto->album,
 			intended_owner_id: $init_dto->intended_owner_id,
 			shall_import_via_symlink: $init_dto->import_mode->shall_import_via_symlink,
 			shall_delete_imported: $init_dto->import_mode->shall_delete_imported,
 			shall_rename_photo_title: $init_dto->import_mode->shall_rename_photo_title,
+			apply_watermark: $init_dto->apply_watermark,
 		);
 	}
 

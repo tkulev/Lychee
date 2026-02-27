@@ -33,6 +33,7 @@ class UploadPhotoRequest extends BaseApiRequest implements HasAbstractAlbum
 	protected UploadedFile $file_chunk;
 	protected UploadMetaResource $meta;
 	protected int $file_size;
+	protected ?bool $apply_watermark = null;
 
 	/**
 	 * {@inheritDoc}
@@ -56,6 +57,7 @@ class UploadPhotoRequest extends BaseApiRequest implements HasAbstractAlbum
 			'extension' => ['present', new ExtensionRule()],
 			'chunk_number' => 'required|integer|min:1',
 			'total_chunks' => 'required|integer|gte:chunk_number',
+			'apply_watermark' => 'sometimes|boolean',
 		];
 	}
 
@@ -77,6 +79,10 @@ class UploadPhotoRequest extends BaseApiRequest implements HasAbstractAlbum
 			chunk_number: $values['chunk_number'],
 			total_chunks: $values['total_chunks'],
 		);
+		// Process apply_watermark parameter (optional boolean)
+		if (isset($values['apply_watermark'])) {
+			$this->apply_watermark = self::toBoolean($values['apply_watermark']);
+		}
 	}
 
 	public function uploaded_file_chunk(): UploadedFile
@@ -92,5 +98,10 @@ class UploadPhotoRequest extends BaseApiRequest implements HasAbstractAlbum
 	public function meta(): UploadMetaResource
 	{
 		return $this->meta;
+	}
+
+	public function apply_watermark(): ?bool
+	{
+		return $this->apply_watermark;
 	}
 }

@@ -43,7 +43,7 @@
 			@rotate-photo-c-w="rotatePhotoCW"
 			@rotate-photo-c-c-w="rotatePhotoCCW"
 			@set-album-header="setAlbumHeader"
-			@toggle-star="toggleStar"
+			@toggle-highlight="toggleHighlight"
 			@toggle-move="toggleMove"
 			@toggle-delete="toggleDelete"
 			@go-back="goBack"
@@ -92,6 +92,13 @@
 				:photo="selectedPhoto"
 				:photo-ids="selectedPhotosIds"
 				@tagged="refresh"
+			/>
+			<PhotoLicenseDialog
+				v-model:visible="is_license_visible"
+				:parent-id="undefined"
+				:photo="selectedPhoto"
+				:photo-ids="selectedPhotosIds"
+				@licensed="refresh"
 			/>
 			<PhotoCopyDialog v-model:visible="is_copy_visible" :photo="selectedPhoto" :photo-ids="selectedPhotosIds" @copied="refresh" />
 			<MoveDialog
@@ -161,6 +168,7 @@ import { useSlideshowFunction } from "@/composables/photo/slideshow";
 import { useToast } from "primevue/usetoast";
 import TimelineDates from "@/components/gallery/timelineModule/TimelineDates.vue";
 import PhotoTagDialog from "@/components/forms/photo/PhotoTagDialog.vue";
+import PhotoLicenseDialog from "@/components/forms/photo/PhotoLicenseDialog.vue";
 import PhotoCopyDialog from "@/components/forms/photo/PhotoCopyDialog.vue";
 // import PhotoEdit from "@/components/drawers/PhotoEdit.vue";
 import MoveDialog from "@/components/forms/gallery-dialogs/MoveDialog.vue";
@@ -234,7 +242,7 @@ function photoClick(photoId: string, _e: MouseEvent) {
 }
 
 const albumId = ref(undefined);
-const { toggleStar, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, albumId, toast, lycheeStore);
+const { toggleHighlight, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, albumId, toast, lycheeStore);
 
 const { getNext, getPrevious } = getNextPreviousPhoto(router, photoStore);
 const { slideshow, next, previous, stop } = useSlideshowFunction(1000, is_slideshow_active, slideshow_timeout, videoElement, getNext, getPrevious);
@@ -319,29 +327,33 @@ const {
 	toggleRename,
 	is_tag_visible,
 	toggleTag,
+	is_license_visible,
+	toggleLicense,
 	is_copy_visible,
 	toggleCopy,
 } = useGalleryModals(togglableStore);
 
 const photoCallbacks = {
 	star: () => {
-		PhotoService.star(selectedPhotosIds.value, true);
+		PhotoService.highlight(selectedPhotosIds.value, true);
 		AlbumService.clearCache();
 		refresh();
 	},
 	unstar: () => {
-		PhotoService.star(selectedPhotosIds.value, false);
+		PhotoService.highlight(selectedPhotosIds.value, false);
 		AlbumService.clearCache();
 		refresh();
 	},
 	setAsCover: () => {},
 	setAsHeader: () => {},
 	toggleTag: toggleTag,
+	toggleLicense: toggleLicense,
 	toggleRename: toggleRename,
 	toggleCopyTo: toggleCopy,
 	toggleMove: toggleMove,
 	toggleDelete: toggleDelete,
 	toggleDownload: () => {},
+	toggleApplyRenamer: () => {},
 };
 
 const {
@@ -395,7 +407,7 @@ onKeyStroke("Escape", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && i
 // Priviledged Photo operations
 // onKeyStroke("m", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleMove());
 // onKeyStroke("e", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleEdit());
-// onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleStar());
+// onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && photoStore.rights?.can_edit && toggleHighlight());
 onKeyStroke(["Delete", "Backspace"], () => !shouldIgnoreKeystroke() && photoStore.isLoaded && toggleDelete());
 
 // on key stroke escape:

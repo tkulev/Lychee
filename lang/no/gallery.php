@@ -42,7 +42,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Usortert',
-        'starred' => 'Stjernemerket',
+        'highlighted' => 'Stjernemerket',
         'recent' => 'Nylig',
         'public' => 'Offentlig',
         'on_this_day' => 'På denne dagen',
@@ -63,6 +63,7 @@ return [
         'masonry' => 'With aspect, masonry',
         'grid' => 'With aspect, grid',
         'filmstrip' => 'Filmstripe',
+        'list' => 'Listevisning',
     ],
     'filter' => [
         'by_rating' => 'Filter by star rating',
@@ -96,8 +97,8 @@ return [
     'album' => [
         'header_albums' => 'Album',
         'header_photos' => 'Bilder',
-        'show_starred' => 'Filter starred images',
-        'copy_starred_names' => 'Copy starred photo names to clipboard',
+        'show_highlighted' => 'Filter highlighted images',
+        'copy_highlighted_names' => 'Copy highlighted photo names to clipboard',
         'no_results' => 'Ingenting å se her',
         'upload' => 'Last opp bilder',
         'tabs' => [
@@ -117,6 +118,8 @@ return [
             'share' => 'Del Album',
             'embed' => 'Embed Album',
             'stats_only_se' => 'Statistikk tilgjengelig i Supporter Edition',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Antall besøk',
@@ -150,8 +153,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Stjerne',
-            'unstar' => 'Fjern Stjerne',
+            'highlight' => 'Stjerne',
+            'unhighlight' => 'Fjern Stjerne',
             'set_album_header' => 'Angi som albumoverskrift',
             'move' => 'Flytt',
             'delete' => 'Slett',
@@ -230,12 +233,14 @@ return [
         'consent' => 'Tap to consent.',
     ],
     'menus' => [
-        'star' => 'Star',
-        'unstar' => 'Unstar',
-        'star_all' => 'Star Selected',
-        'unstar_all' => 'Unstar Selected',
+        'highlight' => 'Star',
+        'unhighlight' => 'Unstar',
+        'highlight_all' => 'Star Selected',
+        'unhighlight_all' => 'Unstar Selected',
         'tag' => 'Tag',
         'tag_all' => 'Tag Selected',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Set Album Cover',
         'remove_header' => 'Remove Album Header',
         'set_header' => 'Set Album Header',
@@ -252,6 +257,8 @@ return [
         'download_all' => 'Download Selected',
         'merge' => 'Merge',
         'merge_all' => 'Merge Selected',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Upload Photo',
         'import_link' => 'Import from Link',
         'import_server' => 'Import from Server',

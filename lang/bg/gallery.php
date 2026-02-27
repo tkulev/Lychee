@@ -42,7 +42,7 @@ return [
     ],
     'smart_album' => [
         'unsorted' => 'Несортирани',
-        'starred' => 'Отбелязани',
+        'highlighted' => 'Отбелязани',
         'recent' => 'Скорошни',
         'public' => 'Публични',
         'on_this_day' => 'На този ден',
@@ -63,6 +63,7 @@ return [
         'masonry' => 'С пропорции, masonry',
         'grid' => 'С пропорции, решетка',
         'filmstrip' => 'Филмова лента',
+        'list' => 'Изглед списък',
     ],
     'filter' => [
         'by_rating' => 'Филтриране по звезден рейтинг',
@@ -96,8 +97,8 @@ return [
     'album' => [
         'header_albums' => 'Албуми',
         'header_photos' => 'Снимки',
-        'show_starred' => 'Филтрирай отбелязаните снимки',
-        'copy_starred_names' => 'Копирай имената на маркираните снимки',
+        'show_highlighted' => 'Филтрирай отбелязаните снимки',
+        'copy_highlighted_names' => 'Копирай имената на маркираните снимки',
         'no_results' => 'Няма какво да се покаже',
         'upload' => 'Качване на снимки',
         'tabs' => [
@@ -117,6 +118,8 @@ return [
             'share' => 'Сподели албума',
             'embed' => 'Вгради албума',
             'stats_only_se' => 'Статистиката е налична в Supporter Edition',
+            'apply_renamer' => 'Apply Renamer Rules',
+            'watermark' => 'Watermark',
         ],
         'stats' => [
             'number_of_visits' => 'Брой посещения',
@@ -150,8 +153,8 @@ return [
     ],
     'photo' => [
         'actions' => [
-            'star' => 'Отбележи',
-            'unstar' => 'Премахни отметка',
+            'highlight' => 'Отбележи',
+            'unhighlight' => 'Премахни отметка',
             'set_album_header' => 'Задай като заглавка на албума',
             'move' => 'Премести',
             'delete' => 'Изтрий',
@@ -230,12 +233,14 @@ return [
         'consent' => 'Докоснете, за да потвърдите.',
     ],
     'menus' => [
-        'star' => 'Отбележи',
-        'unstar' => 'Премахни отметка',
-        'star_all' => 'Отбележи избраните',
-        'unstar_all' => 'Премахни отметките',
+        'highlight' => 'Отбележи',
+        'unhighlight' => 'Премахни отметка',
+        'highlight_all' => 'Отбележи избраните',
+        'unhighlight_all' => 'Премахни отметките',
         'tag' => 'Таг',
         'tag_all' => 'Тагни избраните',
+        'license' => 'License',
+        'license_all' => 'License Selected',
         'set_cover' => 'Задай корица на албума',
         'remove_header' => 'Премахни заглавката на албума',
         'set_header' => 'Задай заглавка на албума',
@@ -252,6 +257,8 @@ return [
         'download_all' => 'Изтегли избраните',
         'merge' => 'Слей',
         'merge_all' => 'Слей избраните',
+        'apply_renamer' => 'Apply Renamer',
+        'apply_renamer_all' => 'Apply Renamer to Selected',
         'upload_photo' => 'Качи снимка',
         'import_link' => 'Импорт от линк',
         'import_server' => 'Импорт от сървър',

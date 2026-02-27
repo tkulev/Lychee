@@ -9,6 +9,7 @@
 namespace App\Http\Resources\GalleryConfigs;
 
 use App\Facades\Helpers;
+use App\Image\Watermarker;
 use App\Repositories\ConfigManager;
 use Safe\Exceptions\InfoException;
 use function Safe\ini_get;
@@ -20,12 +21,17 @@ class UploadConfig extends Data
 {
 	public int $upload_processing_limit;
 	public int $upload_chunk_size;
+	public bool $can_watermark_optout;
 
 	public function __construct()
 	{
 		$config_manager = resolve(ConfigManager::class);
 		$this->upload_processing_limit = max(1, $config_manager->getValueAsInt('upload_processing_limit'));
 		$this->upload_chunk_size = self::getUploadLimit();
+
+		// Compute watermarker status
+		$watermarker = resolve(Watermarker::class);
+		$this->can_watermark_optout = $watermarker->can_watermark() && !$config_manager->getValueAsBool('watermark_optout_disabled');
 	}
 
 	public static function getUploadLimit(): int

@@ -139,9 +139,10 @@ Route::post('/Photo', [Gallery\PhotoController::class, 'upload'])
 Route::patch('/Photo', [Gallery\PhotoController::class, 'update']);
 Route::patch('/Photo::rename', [Gallery\PhotoController::class, 'rename']);
 Route::patch('/Photo::tags', [Gallery\PhotoController::class, 'tags']);
+Route::patch('/Photo::license', [Gallery\PhotoController::class, 'license']);
 Route::post('/Photo::move', [Gallery\PhotoController::class, 'move']);
 Route::post('/Photo::copy', [Gallery\PhotoController::class, 'copy']);
-Route::post('/Photo::star', [Gallery\PhotoController::class, 'star']);
+Route::post('/Photo::highlight', [Gallery\PhotoController::class, 'highlight']);
 Route::post('/Photo::setRating', [Gallery\PhotoController::class, 'rate']);
 Route::post('/Photo::rotate', [Gallery\PhotoController::class, 'rotate']);
 Route::post('/Photo::watermark', [Gallery\PhotoController::class, 'watermark'])->middleware('support:se');
@@ -332,3 +333,4 @@ Route::post('/Renamer', [RenamerController::class, 'store'])->middleware(['suppo
 Route::put('/Renamer', [RenamerController::class, 'update'])->middleware(['support:se']);
 Route::delete('/Renamer', [RenamerController::class, 'destroy'])->middleware(['support:se']);
 Route::post('/Renamer::test', [RenamerController::class, 'test'])->middleware(['support:se']);
+Route::post('/Renamer::preview', [RenamerController::class, 'preview'])->middleware(['support:se']);

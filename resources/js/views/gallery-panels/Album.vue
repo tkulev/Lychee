@@ -35,7 +35,7 @@
 		@rotate-photo-c-w="rotatePhotoCW"
 		@rotate-photo-c-c-w="rotatePhotoCCW"
 		@set-album-header="setAlbumHeader"
-		@toggle-star="toggleStar"
+		@toggle-star="toggleHighlight"
 		@toggle-move="toggleMove"
 		@toggle-delete="toggleDelete"
 		@updated="refresh()"
@@ -56,6 +56,18 @@
 			:photo="selectedPhoto"
 			:photo-ids="selectedPhotosIds"
 			@tagged="
+				() => {
+					unselect();
+					refresh();
+				}
+			"
+		/>
+		<PhotoLicenseDialog
+			v-model:visible="is_license_visible"
+			:parent-id="albumId"
+			:photo="selectedPhoto"
+			:photo-ids="selectedPhotosIds"
+			@licensed="
 				() => {
 					unselect();
 					refresh();
@@ -140,6 +152,7 @@ import MoveDialog from "@/components/forms/gallery-dialogs/MoveDialog.vue";
 import DeleteDialog from "@/components/forms/gallery-dialogs/DeleteDialog.vue";
 import { useGalleryModals } from "@/composables/modalsTriggers/galleryModals";
 import PhotoTagDialog from "@/components/forms/photo/PhotoTagDialog.vue";
+import PhotoLicenseDialog from "@/components/forms/photo/PhotoLicenseDialog.vue";
 import PhotoCopyDialog from "@/components/forms/photo/PhotoCopyDialog.vue";
 import SensitiveWarning from "@/components/gallery/albumModule/SensitiveWarning.vue";
 import Unlock from "@/components/forms/album/Unlock.vue";
@@ -253,6 +266,7 @@ const {
 	toggleMove,
 	is_rename_visible,
 	is_tag_visible,
+	is_license_visible,
 	is_copy_visible,
 	is_import_from_dropbox_open,
 	is_import_from_server_open,
@@ -260,7 +274,7 @@ const {
 
 const { getParentId } = usePhotoRoute(router);
 
-const { toggleStar, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, albumId, toast, lycheeStore);
+const { toggleHighlight, rotatePhotoCCW, rotatePhotoCW, setAlbumHeader, rotateOverlay } = usePhotoActions(photoStore, albumId, toast, lycheeStore);
 
 const { getNext, getPrevious } = getNextPreviousPhoto(router, photoStore);
 const { slideshow, next, previous, stop } = useSlideshowFunction(1000, is_slideshow_active, slideshow_timeout, videoElement, getNext, getPrevious);
@@ -369,7 +383,7 @@ onKeyStroke(
 // Priviledged Photo operations
 onKeyStroke("m", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && albumStore.rights?.can_edit && toggleMove());
 onKeyStroke("e", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && albumStore.rights?.can_edit && toggleEdit());
-onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && albumStore.rights?.can_edit && toggleStar());
+onKeyStroke("s", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && albumStore.rights?.can_edit && toggleHighlight());
 onKeyStroke(["Delete", "Backspace"], () => !shouldIgnoreKeystroke() && photoStore.isLoaded && albumStore.rights?.can_delete && toggleDelete());
 onKeyStroke("0", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && handleRatingClick(photoStore.photo!.id, 0));
 onKeyStroke("1", () => !shouldIgnoreKeystroke() && photoStore.isLoaded && handleRatingClick(photoStore.photo!.id, 1));

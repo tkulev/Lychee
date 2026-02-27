@@ -41,9 +41,12 @@ export const useTogglablesStateStore = defineStore("togglables-store", {
 		embed_code_mode: "album" as "album" | "stream", // Mode for embed code dialog
 		is_import_from_link_open: false,
 		is_tag_visible: false,
+		is_license_visible: false,
 		is_copy_visible: false,
 		is_import_from_dropbox_open: false,
 		is_import_from_server_open: false,
+		is_apply_renamer_visible: false,
+		is_watermark_confirm_visible: false,
 
 		// Help
 		is_keybindings_help_open: false,
