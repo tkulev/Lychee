@@ -8,9 +8,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LegacyLocalIdRedirect
 {
@@ -27,14 +27,13 @@ class LegacyLocalIdRedirect
 		$album_id = $request->route('albumId');
 
 		if ($album_id !== null && strlen($album_id) === 14 && is_numeric($album_id)) {
-			$legacy = DB::table('base_albums')->where('legacy_id', '=', $album_id)->first();
-			$new_album_id = $legacy ? $legacy->id : null;
-			if ($new_album_id === null) {
-				throw new ModelNotFoundException();
+			$album = DB::table('base_albums')->where('legacy_id', '=', $album_id)->first();
+			if ($album === null) {
+				throw new NotFoundHttpException();
 			}
 
 			// redirect to new gallery route with the resolved id
-			return redirect()->route('gallery', $new_album_id, 301);
+			return redirect()->route('gallery', $album->id, 301);
 		}
 
 		return $next($request);
