@@ -106,5 +106,6 @@ class Kernel extends HttpKernel
 		'unlock_with_password' => \App\Http\Middleware\UnlockWithPassword::class,
 		'response_cache' => \App\Http\Middleware\Caching\ResponseCache::class,
 		'album_cache_refresher' => \App\Http\Middleware\Caching\AlbumRouteCacheRefresher::class,
+		'legacy_id_redirect' => \App\Http\Middleware\LegacyLocalIdRedirect::class,
 	];
 }
