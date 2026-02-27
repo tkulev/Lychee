@@ -338,6 +338,8 @@ return [
         'webshop_auto_fulfill_enabled' => 'Enable auto-fulfillment of orders.',
         'webshop_manual_fulfill_enabled' => 'Enable auto-fulfillment of orders on manual action.',
         'enable_photo_details_always_open' => 'Photo details always visible.',
+        'album_enhanced_display_enabled' => 'Enable enhanced album header',
+        'album_header_size' => 'Album header size',
     ],
     'details' => [
         'version' => '',
@@ -672,6 +674,8 @@ return [
         'webshop_auto_fulfill_enabled' => 'Once a payment is completed, the content is automatically made available to the user when possible.',
         'webshop_manual_fulfill_enabled' => 'When "Mark as Delivered" is clicked, the content is automatically made available to the user when possible.',
         'enable_photo_details_always_open' => 'When opening the photo view, the photo details drawer is always visible.',
+        'album_enhanced_display_enabled' => 'Option to enable a new style of album header with a larger title, an "Open Gallery" button, and customize the album title style.',
+        'album_header_size' => 'Configuration of the size of the header image in album view.',
     ],
     'category_name' => [
         'config' => 'Basics',

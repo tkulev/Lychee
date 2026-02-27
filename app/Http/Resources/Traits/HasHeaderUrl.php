@@ -86,6 +86,6 @@ trait HasHeaderUrl
 			->where('photo_id', '=', $photo->photo_id)
 			->where('type', '>', 0)
 			->orderBy('type', 'asc')
-			->first();
+			->first()?->url;
 	}
 }
