@@ -122,7 +122,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
 import { useAlbumStore } from "@/stores/AlbumState";
-import AlbumService, { UpdateAbumData } from "@/services/album-service";
+import AlbumService, { UpdateAlbumHeaderData } from "@/services/album-service";
 import HeaderEditButton from "./HeaderEditButton.vue";
 import AlbumHeaderImage from "./AlbumHeaderImage.vue";
 import HeaderFocusPicker from "./HeaderFocusPicker.vue";
@@ -244,37 +244,14 @@ function enableEditMode() {
 }
 
 function saveChanges() {
-	if (!("editable" in props.album) || !props.album.editable) {
-		toast.add({ severity: "warn", summary: trans("toasts.error"), detail: trans("toasts.update_failed"), life: 3000 });
-		return;
-	}
-
-	const data: App.Http.Resources.Editable.EditableBaseAlbumResource = props.album.editable as App.Http.Resources.Editable.EditableBaseAlbumResource;
-
-	const payload: UpdateAbumData = {
+	const payload: UpdateAlbumHeaderData = {
 		album_id: props.album.id,
-		title: props.album.title,
-		license: data.license,
-		slug: props.album.slug,
-		description: data.description ?? null,
-		photo_sorting_column: (data.photo_sorting?.column as App.Enum.ColumnSortingPhotoType) ?? null,
-		photo_sorting_order: data.photo_sorting?.order ?? null,
-		album_sorting_column: (data.album_sorting?.column as App.Enum.ColumnSortingAlbumType) ?? null,
-		album_sorting_order: data.album_sorting?.order ?? null,
-		album_aspect_ratio: data.aspect_ratio ?? null,
-		photo_layout: data.photo_layout ?? null,
-		copyright: data.copyright ?? null,
-		header_id: data.header_id ?? null,
-		is_compact: false,
-		is_pinned: data.is_pinned,
-		album_timeline: data.album_timeline ?? null,
-		photo_timeline: data.photo_timeline ?? null,
 		title_color: COLOR_ENUMS[selectedColorIndex.value],
 		title_position: POSITION_ENUMS[position.value],
 		header_photo_focus: focusX.value !== null && focusY.value !== null ? { x: focusX.value, y: focusY.value } : null,
 	};
 
-	AlbumService.updateAlbum(payload)
+	AlbumService.updateAlbumHeader(payload)
 		.then(() => {
 			toast.add({ severity: "success", summary: trans("toasts.success"), detail: trans("toasts.album_updated"), life: 3000 });
 			mode.value = "normal";

@@ -555,9 +555,6 @@ function saveAlbum() {
 		album_timeline: albumTimeline.value?.value ?? null,
 		photo_timeline: photoTimeline.value?.value ?? null,
 		is_pinned: albumStore.tagOrModelAlbum?.editable?.is_pinned ?? false,
-		title_color: albumHeaderTitleStyle.value?.value ?? null,
-		title_position: albumHeaderTitlePosition.value?.value ?? null,
-		header_photo_focus: albumStore.tagOrModelAlbum?.editable?.header_photo_focus ?? null,
 	};
 	AlbumService.updateAlbum(data).then(() => {
 		toast.add({ severity: "success", summary: trans("toasts.success"), life: 3000 });

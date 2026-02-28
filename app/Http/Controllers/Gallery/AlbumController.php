@@ -45,6 +45,7 @@ use App\Http\Requests\Album\SetPinnedRequest;
 use App\Http\Requests\Album\TargetListAlbumRequest;
 use App\Http\Requests\Album\TransferAlbumRequest;
 use App\Http\Requests\Album\UnlockAlbumRequest;
+use App\Http\Requests\Album\UpdateAlbumHeaderRequest;
 use App\Http\Requests\Album\UpdateAlbumRequest;
 use App\Http\Requests\Album\UpdateTagAlbumRequest;
 use App\Http\Requests\Album\WatermarkAlbumRequest;
@@ -118,9 +119,6 @@ class AlbumController extends Controller
 
 		$album->album_timeline = $request->album_timeline();
 		$album->photo_timeline = $request->photo_timeline();
-		$album->title_color = $request->titleColor() ?? AlbumTitleColor::WHITE;
-		$album->title_position = $request->titlePosition() ?? AlbumTitlePosition::TOP_LEFT;
-		$album->header_photo_focus = $request->headerPhotoFocus();
 
 		$album = $set_header->do(
 			album: $album,
@@ -274,6 +272,20 @@ class AlbumController extends Controller
 	public function header(SetAsHeaderRequest $request, SetHeader $set_header): void
 	{
 		$set_header->do($request->album(), $request->is_compact(), $request->photo());
+	}
+
+	/**
+	 * Update the album header customization (title color, position, focus point).
+	 */
+	public function updateAlbumHeader(UpdateAlbumHeaderRequest $request): EditableBaseAlbumResource
+	{
+		$album = $request->album();
+		$album->title_color = $request->titleColor() ?? AlbumTitleColor::WHITE;
+		$album->title_position = $request->titlePosition() ?? AlbumTitlePosition::TOP_LEFT;
+		$album->header_photo_focus = $request->headerPhotoFocus();
+		$album->save();
+
+		return EditableBaseAlbumResource::fromModel($album);
 	}
 
 	/**
