@@ -69,6 +69,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\ValidationException;
+use LycheeVerify\Contract\Status;
 
 class UpdateAlbumRequest extends BaseApiRequest implements HasAlbum, HasTitle, HasDescription, HasLicense, HasPhotoSortingCriterion, HasAlbumSortingCriterion, HasCopyright, HasPhoto, HasCompactBoolean, HasPhotoLayout, HasTimelineAlbum, HasTimelinePhoto, HasIsPinned, HasTitleCustomization, HasHeaderFocus
 {
@@ -151,8 +152,8 @@ class UpdateAlbumRequest extends BaseApiRequest implements HasAlbum, HasTitle, H
 			RequestAttribute::HEADER_ID_ATTRIBUTE => ['present', new RandomIDRule(true)],
 			RequestAttribute::ALBUM_TIMELINE_ALBUM => ['present', 'nullable', new Enum(TimelineAlbumGranularity::class), new EnumRequireSupportRule(TimelinePhotoGranularity::class, [TimelinePhotoGranularity::DEFAULT, TimelinePhotoGranularity::DISABLED], $this->verify())],
 			RequestAttribute::ALBUM_TIMELINE_PHOTO => ['present', 'nullable', new Enum(TimelinePhotoGranularity::class), new EnumRequireSupportRule(TimelinePhotoGranularity::class, [TimelinePhotoGranularity::DEFAULT, TimelinePhotoGranularity::DISABLED], $this->verify())],
-			RequestAttribute::ALBUM_TITLE_COLOR_ATTRIBUTE => ['present', 'nullable', new Enum(AlbumTitleColor::class), new EnumRequireSupportRule(AlbumTitleColor::class, [AlbumTitleColor::WHITE], $this->verify())],
-			RequestAttribute::ALBUM_TITLE_POSITION_ATTRIBUTE => ['present', 'nullable', new Enum(AlbumTitlePosition::class), new EnumRequireSupportRule(AlbumTitlePosition::class, [AlbumTitlePosition::TOP_LEFT], $this->verify())],
+			RequestAttribute::ALBUM_TITLE_COLOR_ATTRIBUTE => ['present', 'nullable', new Enum(AlbumTitleColor::class), new EnumRequireSupportRule(AlbumTitleColor::class, [AlbumTitleColor::WHITE], $this->verify(), Status::PRO_EDITION)],
+			RequestAttribute::ALBUM_TITLE_POSITION_ATTRIBUTE => ['present', 'nullable', new Enum(AlbumTitlePosition::class), new EnumRequireSupportRule(AlbumTitlePosition::class, [AlbumTitlePosition::TOP_LEFT], $this->verify(), Status::PRO_EDITION)],
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE => ['nullable', 'array'],
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE . '.x' => ['required_with:' . RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE, 'numeric', 'between:-1,1'],
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE . '.y' => ['required_with:' . RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE, 'numeric', 'between:-1,1'],

@@ -56,7 +56,7 @@
 							'h-8',
 							'w-8',
 							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -left-16 !absolute text-white',
+							'top-1/2 -left-16 absolute! text-white',
 						]"
 						@click="setColor(selectedColorIndex - 1)"
 						icon="pi pi-chevron-left"
@@ -67,7 +67,7 @@
 							'h-8',
 							'w-8',
 							'bg-(--p-toolbar-background)/60 rounded-md border-0 cursor-pointer hover:bg-white/30 ',
-							'top-1/2 -right-16 !absolute text-white',
+							'top-1/2 -right-16 absolute! text-white',
 						]"
 						@click="setColor(selectedColorIndex + 1)"
 						icon="pi pi-chevron-right"
@@ -84,14 +84,14 @@
 					</div>
 
 					<h1
-						class="text-4xl sm:text-6xl tracking-widest leading-snug font-bold uppercase m-0 break-words mb-2"
+						class="text-4xl sm:text-6xl tracking-widest leading-snug font-bold uppercase m-0 wrap-break-word mb-2"
 						:style="{ color: selectedColor }"
 					>
 						{{ album.title }}
 					</h1>
 					<span
 						v-if="album.preFormattedData.min_max_text"
-						class="block text-xl sm:text-sm tracking-widest leading-snug font-bold uppercase m-0 break-words mb-2"
+						class="block text-xl sm:text-sm tracking-widest leading-snug font-bold uppercase m-0 wrap-break-word mb-2"
 						:style="{ color: selectedColor }"
 					>
 						{{ album.preFormattedData.min_max_text }}

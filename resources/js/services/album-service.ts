@@ -92,7 +92,7 @@ const AlbumService = {
 		return requester.get(`${Constants.getApiUrl()}Albums`, { data: {}, id: "albums" });
 	},
 
-	get(album_id: string, page?: number): Promise<AxiosResponse<App.Http.Resources.Models.AbstractAlbumResource>> {
+	get(album_id: string, page?: number): Promise<AxiosResponse<App.Http.Resources.Models.Head>> {
 		const params = {
 			album_id: album_id,
 			page: page ?? 1,
