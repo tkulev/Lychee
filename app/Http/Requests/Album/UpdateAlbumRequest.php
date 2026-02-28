@@ -62,6 +62,8 @@ use App\Rules\CopyrightRule;
 use App\Rules\DescriptionRule;
 use App\Rules\EnumRequireSupportRule;
 use App\Rules\RandomIDRule;
+use App\Rules\SlugRule;
+use App\Rules\StringRequireSupportRule;
 use App\Rules\TitleRule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -154,6 +156,7 @@ class UpdateAlbumRequest extends BaseApiRequest implements HasAlbum, HasTitle, H
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE => ['nullable', 'array'],
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE . '.x' => ['required_with:' . RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE, 'numeric', 'between:-1,1'],
 			RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE . '.y' => ['required_with:' . RequestAttribute::HEADER_PHOTO_FOCUS_ATTRIBUTE, 'numeric', 'between:-1,1'],
+			RequestAttribute::SLUG_ATTRIBUTE => ['sometimes', 'nullable', new StringRequireSupportRule(null, $this->verify()), new SlugRule($this->input(RequestAttribute::ALBUM_ID_ATTRIBUTE))],
 		];
 	}
 
@@ -202,6 +205,9 @@ class UpdateAlbumRequest extends BaseApiRequest implements HasAlbum, HasTitle, H
 
 		$this->is_compact = static::toBoolean($values[RequestAttribute::IS_COMPACT_ATTRIBUTE]);
 		$this->is_pinned = static::toBoolean($values[RequestAttribute::IS_PINNED_ATTRIBUTE]);
+
+		$slug = $values[RequestAttribute::SLUG_ATTRIBUTE] ?? null;
+		$album->slug = ($slug !== '' ? $slug : null);
 
 		if ($this->is_compact) {
 			return;

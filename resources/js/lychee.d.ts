@@ -283,6 +283,7 @@ declare namespace App.Http.Resources.Editable {
 	export type EditableBaseAlbumResource = {
 		id: string;
 		title: string;
+		slug: string | null;
 		description: string | null;
 		copyright: string | null;
 		license: App.Enum.LicenseType | null;
@@ -613,6 +614,7 @@ declare namespace App.Http.Resources.Models {
 	export type HeadAlbumResource = {
 		id: string;
 		title: string;
+		slug: string | null;
 		owner_name: string | null;
 		description: string | null;
 		copyright: string | null;
@@ -642,6 +644,7 @@ declare namespace App.Http.Resources.Models {
 	export type HeadTagAlbumResource = {
 		id: string;
 		title: string;
+		slug: string | null;
 		owner_name: string | null;
 		copyright: string | null;
 		is_tag_album: boolean;
@@ -671,6 +674,10 @@ declare namespace App.Http.Resources.Models {
 		album_id: string;
 		title: string;
 		url: string | null;
+	};
+	export type PhotoAlbumResource = {
+		id: string;
+		title: string;
 	};
 	export type PhotoRatingResource = {
 		rating_user: number;
@@ -712,6 +719,11 @@ declare namespace App.Http.Resources.Models {
 		shared_count: number;
 		rating_count: number;
 		rating_avg: number | null;
+	};
+	export type RenamerPreviewResource = {
+		id: string;
+		original: string;
+		new: string;
 	};
 	export type RenamerRuleResource = {
 		id: number;

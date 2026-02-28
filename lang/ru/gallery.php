@@ -140,6 +140,9 @@ return [
         ],
         'properties' => [
             'title' => 'Название',
+            'slug' => 'Slug (дружественный URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Описание',
             'photo_ordering' => 'Сортировка фотографий по',
             'children_ordering' => 'Сортировка альбомов по',
@@ -216,6 +219,10 @@ return [
             'aperture' => 'Диафрагма',
             'focal' => 'Фокусное расстояние',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Статистика',
                 'number_of_visits' => 'Кол-во посещений',

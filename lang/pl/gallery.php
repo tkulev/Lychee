@@ -141,6 +141,9 @@ return [
         ],
         'properties' => [
             'title' => 'Tytuł',
+            'slug' => 'Slug (przyjazny URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Opis',
             'photo_ordering' => 'Sortuj zdjęcia według',
             'children_ordering' => 'Sortuj albumy według',
@@ -217,6 +220,10 @@ return [
             'aperture' => 'Przysłona',
             'focal' => 'Ogniskowa',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Statistics',
                 'number_of_visits' => 'Number of visits',

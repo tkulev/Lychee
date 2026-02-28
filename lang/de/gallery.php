@@ -140,6 +140,9 @@ return [
         ],
         'properties' => [
             'title' => 'Titel',
+            'slug' => 'Slug (freundliche URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Beschreibung',
             'photo_ordering' => 'Fotos anordnen nach',
             'children_ordering' => 'Alben anordnen nach',
@@ -216,6 +219,10 @@ return [
             'aperture' => 'Blende',
             'focal' => 'Brennweite',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Statistiken',
                 'number_of_visits' => 'Anzahl der Besuche',

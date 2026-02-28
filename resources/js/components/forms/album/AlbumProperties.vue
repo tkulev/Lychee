@@ -8,6 +8,30 @@
 						<label for="title">{{ $t("gallery.album.properties.title") }}</label>
 					</FloatLabel>
 				</div>
+				<div v-if="is_se_enabled || is_se_preview_enabled" class="h-12 mt-2" dir="ltr">
+					<InputGroup class="rounded-none">
+						<div
+							class="text-muted-color flex items-center"
+							:class="{ 'cursor-pointer': slug }"
+							@click="copySlugUrl"
+							v-tooltip.top="{ value: $t('gallery.album.properties.copy_slug_url'), pt: { root: slug ? '' : 'hidden!' } }"
+						>
+							<span>{{ Constants.BASE_URL }}/gallery/</span>
+						</div>
+						<FloatLabel variant="on">
+							<InputText id="slug" v-model="slug" type="text" :disabled="is_se_preview_enabled" class="pl-1" />
+							<label for="slug" :class="{ 'text-primary-500': is_se_preview_enabled }">{{ $t("gallery.album.properties.slug") }}</label>
+						</FloatLabel>
+						<Button
+							icon="pi pi-sync"
+							text
+							severity="primary"
+							:disabled="is_se_preview_enabled"
+							@click="generateSlug"
+							v-tooltip.top="$t('gallery.album.properties.generate_slug')"
+						/>
+					</InputGroup>
+				</div>
 				<div class="my-4 h-48">
 					<FloatLabel variant="on">
 						<Textarea id="description" v-model="description" class="w-full h-48" :rows="6" :cols="30" />
@@ -331,6 +355,7 @@
 	</Card>
 </template>
 <script setup lang="ts">
+import Constants from "@/services/constants";
 import { computed, onMounted, ref, watch } from "vue";
 import Button from "primevue/button";
 import Card from "primevue/card";
@@ -361,6 +386,7 @@ import TagsInput from "@/components/forms/basic/TagsInput.vue";
 import ToggleSwitch from "primevue/toggleswitch";
 import { usePhotosStore } from "@/stores/PhotosState";
 import { useAlbumStore } from "@/stores/AlbumState";
+import InputGroup from "primevue/inputgroup";
 
 type HeaderOption = {
 	id: string;
@@ -370,7 +396,7 @@ type HeaderOption = {
 
 const LycheeState = useLycheeStateStore();
 const albumStore = useAlbumStore();
-const { is_se_enabled } = storeToRefs(LycheeState);
+const { is_se_enabled, is_se_preview_enabled } = storeToRefs(LycheeState);
 
 const photosStore = usePhotosStore();
 
@@ -378,6 +404,33 @@ const toast = useToast();
 const is_model_album = ref(true);
 const albumId = ref("");
 const title = ref("");
+const slug = ref<string | null>(null);
+
+function copySlugUrl() {
+	if (slug.value === null || slug.value.trim() === "") {
+		return;
+	}
+
+	const url = Constants.BASE_URL + "/gallery/" + slug.value;
+	navigator.clipboard.writeText(url).then(() => {
+		toast.add({ severity: "success", summary: trans("dialogs.share_album.url_copied"), life: 2000 });
+	});
+}
+
+function generateSlug() {
+	if (title.value === null || title.value.trim() === "") {
+		return;
+	}
+	slug.value = title.value
+		.toLowerCase()
+		.replace(/&/g, "and")
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/-+/g, "-")
+		.replace(/^-|-$/g, "")
+		.replace(/^[0-9]+/, "")
+		.replace(/^-/, "")
+		.substring(0, 250);
+}
 const description = ref<string | null>(null);
 const photoSortingColumn = ref<SelectOption<App.Enum.ColumnSortingPhotoType> | undefined>(undefined);
 const photoSortingOrder = ref<SelectOption<App.Enum.OrderSortingType> | undefined>(undefined);
@@ -450,6 +503,7 @@ function load(editable: App.Http.Resources.Editable.EditableBaseAlbumResource, p
 	is_model_album.value = editable.is_model_album;
 	albumId.value = editable.id;
 	title.value = editable.title;
+	slug.value = editable.slug;
 	description.value = editable.description;
 	photoSortingColumn.value = SelectBuilders.buildPhotoSorting(editable.photo_sorting?.column);
 	photoSortingOrder.value = SelectBuilders.buildSortingOrder(editable.photo_sorting?.order);
@@ -486,6 +540,7 @@ function saveAlbum() {
 	const data: UpdateAbumData = {
 		album_id: albumId.value,
 		title: title.value,
+		slug: slug.value === "" ? null : slug.value,
 		license: license.value?.value ?? null,
 		description: description.value,
 		photo_sorting_column: photoSortingColumn.value?.value ?? null,
@@ -520,6 +575,7 @@ function saveTagAlbum() {
 	const data: UpdateTagAlbumData = {
 		album_id: albumId.value,
 		title: title.value,
+		slug: slug.value === "" ? null : slug.value,
 		tags: tags.value,
 		description: description.value,
 		photo_sorting_column: photoSortingColumn.value?.value ?? null,
