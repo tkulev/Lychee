@@ -162,26 +162,6 @@ return [
             'tags_required' => 'Таговете са задължителни.',
             'all_tags_must_match' => 'Всички тагове трябва да съвпадат.',
         ],
-        'title' => [
-            'style' => 'Цвят на заглавието',
-            'position' => 'Позиция на заглавието',
-            'position_options' => [
-                 'top_left' => 'Горе ляво',
-                 'top_right' => 'Горе дясно',
-                 'center' => 'Център',
-                 'bottom_left' => 'Долу ляво',
-                 'bottom_right' => 'Долу дясно',
-            ],
-            'style_options' => [
-                 'white' => 'Бял',
-                 'black' => 'Черен',
-                 'color_1' => 'Цвят 1',
-                 'color_2' => 'Цвят 2',
-                 'color_3' => 'Цвят 3',
-                 'color_4' => 'Цвят 4',
-                 'color_5' => 'Цвят 5',
-            ],
-        ],
     ],
     'photo' => [
         'actions' => [
