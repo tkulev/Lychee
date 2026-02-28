@@ -106,7 +106,7 @@
 				</div>
 			</div>
 			<span
-				v-if="initdata"
+				v-if="initdata && is_album_header_landing_title_enabled"
 				:class="[
 					'author text-center w-full uppercase absolute left-0 z-50 text-shadow-sm',
 					album_header_size === 'half_screen' ? 'bottom-6' : 'bottom-28',
@@ -137,7 +137,7 @@ const lycheeStore = useLycheeStateStore();
 const albumStore = useAlbumStore();
 const toast = useToast();
 
-const { is_album_enhanced_display_enabled, album_header_size } = storeToRefs(lycheeStore);
+const { is_album_enhanced_display_enabled, album_header_size, is_album_header_landing_title_enabled } = storeToRefs(lycheeStore);
 
 const emits = defineEmits<{
 	setPosition: [position: string];
@@ -248,7 +248,7 @@ function saveChanges() {
 		album_id: props.album.id,
 		title_color: COLOR_ENUMS[selectedColorIndex.value],
 		title_position: POSITION_ENUMS[position.value],
-		header_photo_focus: focusX.value !== null && focusY.value !== null ? { x: focusX.value, y: focusY.value } : null,
+		header_photo_focus: focusX.value !== null && focusY.value !== null ? { x: focusX.value, y: focusY.value } : { x: 0, y: 0 },
 	};
 
 	AlbumService.updateAlbumHeader(payload)

@@ -120,6 +120,7 @@ class ConfigIntegrity
 		'photos_star_visibility',
 		'album_enhanced_display_enabled',
 		'album_header_size',
+		'album_header_landing_title_enabled',
 	];
 
 	/**

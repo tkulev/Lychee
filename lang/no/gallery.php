@@ -162,26 +162,7 @@ return [
             'tags_required' => 'Tagger er obligatoriske.',
             'all_tags_must_match' => 'Alle taggene må samsvare.',
         ],
-        'title' => [
-            'style' => 'Header Title Style',
-            'position' => 'Header Title Position',
-            'position_options' => [
-                 'top_left' => 'Top Left',
-                 'top_right' => 'Top Right',
-                 'center' => 'Center',
-                 'bottom_left' => 'Bottom Left',
-                 'bottom_right' => 'Bottom Right',
-            ],
-            'style_options' => [
-                 'white' => 'White',
-                 'black' => 'Black',
-                 'color_1' => 'Color 1',
-                 'color_2' => 'Color 2',
-                 'color_3' => 'Color 3',
-                 'color_4' => 'Color 4',
-                 'color_5' => 'Color 5',
-            ],
-        ],
+
     ],
     'photo' => [
         'actions' => [

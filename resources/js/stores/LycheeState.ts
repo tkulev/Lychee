@@ -53,6 +53,7 @@ export const useLycheeStateStore = defineStore("lychee-store", {
 		// Enhanced Album Display
 		is_album_enhanced_display_enabled: false,
 		album_header_size: "half_screen" as App.Enum.AlbumHeaderSize,
+		is_album_header_landing_title_enabled: false,
 
 		// Download settings
 		is_raw_download_enabled: false,
@@ -162,6 +163,7 @@ export const useLycheeStateStore = defineStore("lychee-store", {
 
 					this.is_album_enhanced_display_enabled = data.is_album_enhanced_display_enabled;
 					this.album_header_size = data.album_header_size;
+					this.is_album_header_landing_title_enabled = data.is_album_header_landing_title_enabled;
 
 					this.clockwork_url = data.clockwork_url;
 

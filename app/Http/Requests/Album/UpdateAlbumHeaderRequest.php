@@ -21,12 +21,10 @@ use App\Http\Requests\Traits\HasHeaderFocusTrait;
 use App\Http\Requests\Traits\HasTitleCustomizationTrait;
 use App\Models\Album;
 use App\Policies\AlbumPolicy;
-use App\Rules\EnumRequireSupportRule;
 use App\Rules\RandomIDRule;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\ValidationException;
-use LycheeVerify\Contract\Status;
 
 class UpdateAlbumHeaderRequest extends BaseApiRequest implements HasAlbum, HasTitleCustomization, HasHeaderFocus
 {

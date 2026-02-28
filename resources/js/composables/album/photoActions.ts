@@ -70,9 +70,6 @@ export function usePhotoActions(photoStore: PhotoStore, albumId: Ref<string | un
 			const isToggleOff = albumStore.modelAlbum?.header_id === photoStore.photo!.id;
 			if (albumStore.modelAlbum !== undefined) {
 				albumStore.modelAlbum.header_id = isToggleOff ? null : photoStore.photo!.id;
-				if (albumStore.modelAlbum.editable) {
-					albumStore.modelAlbum.editable.header_photo_focus = null;
-				}
 				if (albumStore.modelAlbum.preFormattedData) {
 					albumStore.modelAlbum.preFormattedData.header_photo_focus = null;
 				}
@@ -84,7 +81,7 @@ export function usePhotoActions(photoStore: PhotoStore, albumId: Ref<string | un
 				albumStore.album.editable !== null
 			) {
 				albumStore.album.editable.header_id = isToggleOff ? null : photoStore.photo!.id;
-				albumStore.album.editable.header_photo_focus = null;
+				albumStore.album.preFormattedData.header_photo_focus = null;
 			}
 
 			// Update the header image URL in the album's preFormattedData

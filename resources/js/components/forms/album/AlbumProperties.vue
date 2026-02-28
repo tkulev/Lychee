@@ -165,52 +165,6 @@
 							<label for="header">{{ $t("gallery.album.properties.header") }}</label>
 						</FloatLabel>
 					</div>
-					<div class="h-10 my-2 flex" v-if="header_id && header_id.id !== 'compact'">
-						<FloatLabel variant="on" v-if="header_id && header_id.id !== 'compact'">
-							<Select
-								label-id="albumHeaderTitleStyle"
-								v-model="albumHeaderTitleStyle"
-								class="w-62 border-none"
-								:options="albumHeaderTitleStyleOptions"
-								option-label="label"
-								show-clear
-							>
-								<template #value="slotProps">
-									<div v-if="slotProps.value" class="flex items-center">
-										<div>{{ $t(slotProps.value.label) }}</div>
-									</div>
-								</template>
-								<template #option="slotProps">
-									<div class="flex items-center">
-										<div>{{ $t(slotProps.option.label) }}</div>
-									</div>
-								</template>
-							</Select>
-							<label for="albumHeaderTitleStyle">{{ $t("gallery.album.title.style") }}</label>
-						</FloatLabel>
-						<FloatLabel variant="on" v-if="header_id && header_id.id !== 'compact'">
-							<Select
-								label-id="albumHeaderTitlePosition"
-								v-model="albumHeaderTitlePosition"
-								class="w-62 border-none"
-								:options="albumHeaderTitlePositionOptions"
-								option-label="label"
-								show-clear
-							>
-								<template #value="slotProps">
-									<div v-if="slotProps.value" class="flex items-center">
-										<div>{{ $t(slotProps.value.label) }}</div>
-									</div>
-								</template>
-								<template #option="slotProps">
-									<div class="flex items-center">
-										<div>{{ $t(slotProps.option.label) }}</div>
-									</div>
-								</template>
-							</Select>
-							<label for="albumHeaderTitlePosition">{{ $t("gallery.album.title.position") }}</label>
-						</FloatLabel>
-					</div>
 					<div class="h-10 my-2">
 						<FloatLabel variant="on">
 							<Select
@@ -375,8 +329,6 @@ import {
 	SelectBuilders,
 	timelinePhotoGranularityOptions,
 	timelineAlbumGranularityOptions,
-	albumHeaderTitlePositionOptions,
-	albumHeaderTitleStyleOptions,
 } from "@/config/constants";
 import { useToast } from "primevue/usetoast";
 import { trans } from "laravel-vue-i18n";
@@ -436,8 +388,6 @@ const photoSortingColumn = ref<SelectOption<App.Enum.ColumnSortingPhotoType> | u
 const photoSortingOrder = ref<SelectOption<App.Enum.OrderSortingType> | undefined>(undefined);
 const albumSortingColumn = ref<SelectOption<App.Enum.ColumnSortingAlbumType> | undefined>(undefined);
 const albumSortingOrder = ref<SelectOption<App.Enum.OrderSortingType> | undefined>(undefined);
-const albumHeaderTitleStyle = ref<SelectOption<App.Enum.AlbumTitleColor> | undefined>(undefined);
-const albumHeaderTitlePosition = ref<SelectOption<App.Enum.AlbumTitlePosition> | undefined>(undefined);
 const photoLayout = ref<SelectOption<App.Enum.PhotoLayoutType> | undefined>(undefined);
 const photoTimeline = ref<SelectOption<App.Enum.TimelinePhotoGranularity> | undefined>(undefined);
 const albumTimeline = ref<SelectOption<App.Enum.TimelineAlbumGranularity> | undefined>(undefined);
@@ -517,8 +467,6 @@ function load(editable: App.Http.Resources.Editable.EditableBaseAlbumResource, p
 	header_id.value = buildHeaderId(editable.header_id, photos);
 	tags.value = editable.tags;
 	is_and.value = editable.is_and ?? false;
-	albumHeaderTitleStyle.value = SelectBuilders.buildAlbumHeaderTitleStyle(editable.title_color ?? undefined);
-	albumHeaderTitlePosition.value = SelectBuilders.buildAlbumHeaderTitlePosition(editable.title_position ?? undefined);
 }
 
 onMounted(() => {

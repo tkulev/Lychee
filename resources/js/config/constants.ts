@@ -137,24 +137,6 @@ export const paginationUiModeOptions: SelectOption<App.Enum.PaginationMode>[] = 
 	{ value: "page_navigation", label: "gallery.pagination.page_navigation" },
 ];
 
-export const albumHeaderTitlePositionOptions: SelectOption<App.Enum.AlbumTitlePosition>[] = [
-	{ value: "top_left" as App.Enum.AlbumTitlePosition, label: "gallery.album.title.position_options.top_left" },
-	{ value: "top_right" as App.Enum.AlbumTitlePosition, label: "gallery.album.title.position_options.top_right" },
-	{ value: "center" as App.Enum.AlbumTitlePosition, label: "gallery.album.title.position_options.center" },
-	{ value: "bottom_left" as App.Enum.AlbumTitlePosition, label: "gallery.album.title.position_options.bottom_left" },
-	{ value: "bottom_right" as App.Enum.AlbumTitlePosition, label: "gallery.album.title.position_options.bottom_right" },
-];
-
-export const albumHeaderTitleStyleOptions: SelectOption<App.Enum.AlbumTitleColor>[] = [
-	{ value: "white" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.white" },
-	{ value: "black" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.black" },
-	{ value: "colour_1" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.color_1" },
-	{ value: "colour_2" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.color_2" },
-	{ value: "colour_3" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.color_3" },
-	{ value: "colour_4" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.color_4" },
-	{ value: "colour_5" as App.Enum.AlbumTitleColor, label: "gallery.album.title.style_options.color_5" },
-];
-
 export const timeZoneOptions: SelectOption<string>[] = [
 	{ value: "-12:00", label: "-12:00 Uninhabited areas (Baker Island)" },
 	{ value: "-11:00", label: "-11:00 Niue Time" },
@@ -362,12 +344,5 @@ export const SelectBuilders = {
 
 	buildPaginationUiMode(value: string | App.Enum.PaginationMode): SelectOption<App.Enum.PaginationMode> | undefined {
 		return paginationUiModeOptions.find((option) => option.value === value) || undefined;
-	},
-	buildAlbumHeaderTitlePosition(value: string | App.Enum.AlbumTitlePosition | undefined): SelectOption<App.Enum.AlbumTitlePosition> | undefined {
-		return albumHeaderTitlePositionOptions.find((option) => option.value === value) || undefined;
-	},
-
-	buildAlbumHeaderTitleStyle(value: string | App.Enum.AlbumTitleColor | undefined): SelectOption<App.Enum.AlbumTitleColor> | undefined {
-		return albumHeaderTitleStyleOptions.find((option) => option.value === value) || undefined;
 	},
 };

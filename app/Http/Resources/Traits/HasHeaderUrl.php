@@ -84,7 +84,7 @@ trait HasHeaderUrl
 
 		return $photo === null ? null : SizeVariant::query()
 			->where('photo_id', '=', $photo->photo_id)
-			->where('type', '>', 0)
+			->where('type', '>', SizeVariantType::ORIGINAL->value)
 			->orderBy('type', 'asc')
 			->first()?->url;
 	}

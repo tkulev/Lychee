@@ -294,9 +294,6 @@ declare namespace App.Http.Resources.Editable {
 		cover_id: string | null;
 		album_timeline: App.Enum.TimelineAlbumGranularity | null;
 		photo_timeline: App.Enum.TimelinePhotoGranularity | null;
-		title_color: App.Enum.AlbumTitleColor | null;
-		title_position: App.Enum.AlbumTitlePosition | null;
-		header_photo_focus: App.Http.Resources.Models.Utils.HeaderFocusData | null;
 		tags: Array<string>;
 		is_and: boolean;
 		is_model_album: boolean;
@@ -480,6 +477,7 @@ declare namespace App.Http.Resources.GalleryConfigs {
 		photos_star_visibility: App.Enum.PhotoHighlightVisibilityType;
 		is_album_enhanced_display_enabled: boolean;
 		album_header_size: App.Enum.AlbumHeaderSize;
+		is_album_header_landing_title_enabled: boolean;
 	};
 	export type LandingPageResource = {
 		landing_page_enable: boolean;
@@ -591,7 +589,6 @@ declare namespace App.Http.Resources.Models {
 		track_url: string | null;
 		license: string;
 		header_id: string | null;
-		header_photo_focus: Array<any> | null;
 		parent_id: string | null;
 		has_albums: boolean;
 		num_children: number;
@@ -854,8 +851,8 @@ declare namespace App.Http.Resources.Models.Utils {
 		description: string | null;
 		copyright: string | null;
 		palette: App.Http.Resources.Models.ColourPaletteResource | null;
-		title_color: string | null;
-		title_position: string | null;
+		title_color: App.Enum.AlbumTitleColor | null;
+		title_position: App.Enum.AlbumTitlePosition | null;
 		header_photo_focus: App.Http.Resources.Models.Utils.HeaderFocusData | null;
 	};
 	export type PreformattedPhotoData = {

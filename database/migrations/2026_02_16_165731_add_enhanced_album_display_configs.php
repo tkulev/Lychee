@@ -29,6 +29,7 @@ return new class() extends BaseConfigMigration {
 				'is_expert' => false,
 				'level' => 2,
 				'details' => 'Option to enable new style of header with bigger title, button "Open gallery" and allowing customization of title style.',
+				'order' => 10,
 			],
 			[
 				'key' => 'album_header_size',
@@ -40,6 +41,19 @@ return new class() extends BaseConfigMigration {
 				'is_expert' => false,
 				'level' => 2,
 				'details' => 'Option to configure size of header image.',
+				'order' => 11,
+			],
+			[
+				'key' => 'album_header_landing_title_enabled',
+				'value' => '0',
+				'cat' => self::CAT_MOD_PRO,
+				'type_range' => self::BOOL,
+				'description' => 'Display the landing title on at the bottom of the Album header.',
+				'is_secret' => false,
+				'is_expert' => false,
+				'level' => 2,
+				'details' => 'You can configure the landing title in the Landing page module.',
+				'order' => 12,
 			],
 		];
 	}
