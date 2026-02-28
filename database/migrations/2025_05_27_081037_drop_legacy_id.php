@@ -31,9 +31,10 @@ return new class() extends Migration {
 		Schema::table('photos', function (Blueprint $table) {
 			$table->dropColumn(self::LEGACY_ID_NAME);
 		});
-		Schema::table('base_albums', function (Blueprint $table) {
-			$table->dropColumn(self::LEGACY_ID_NAME);
-		});
+
+		// Schema::table('base_albums', function (Blueprint $table) {
+		// 	$table->dropColumn(self::LEGACY_ID_NAME);
+		// });
 
 		DB::table('configs')
 			->where('key', '=', 'legacy_id_redirection')
@@ -45,9 +46,12 @@ return new class() extends Migration {
 	 */
 	public function down(): void
 	{
-		Schema::table('base_albums', function (Blueprint $table) {
-			$table->unsignedBigInteger('legacy_id')->after('id')->nullable(false);
-		});
+		// Do not re-add the column... if it already exists.
+		if (!Schema::hasColumn('base_albums', self::LEGACY_ID_NAME)) {
+			Schema::table('base_albums', function (Blueprint $table) {
+				$table->unsignedBigInteger('legacy_id')->after('id')->nullable(false);
+			});
+		}
 
 		Schema::table('photos', function (Blueprint $table) {
 			$table->unsignedBigInteger('legacy_id')->after('id')->nullable(false);
