@@ -19,6 +19,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'علاقه‌مندی‌ها',
+    'raw' => 'RAW',
     'original' => 'اصلی',
     'medium' => 'متوسط',
     'medium_hidpi' => 'متوسط HiDPI',
@@ -29,6 +30,7 @@ return [
     'placeholder' => 'تصویر با کیفیت پایین',
     'thumbnail' => 'تصویر کوچک',
     'live_video' => 'بخش ویدئویی لایو-فوتو',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'تاریخ دوربین',
     'album_reserved' => 'کلیه حقوق محفوظ است',
     'map' => [

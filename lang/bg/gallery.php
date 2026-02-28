@@ -20,6 +20,7 @@ return [
         'shared_with_me' => 'Споделени с мен',
     ],
     'favourites' => 'Любими',
+    'raw' => 'RAW',
     'original' => 'Оригинал',
     'medium' => 'Среден',
     'medium_hidpi' => 'Среден HiDPI',
@@ -30,6 +31,7 @@ return [
     'placeholder' => 'Заместител с ниско качество',
     'thumbnail' => 'Миниатюра на снимка',
     'live_video' => 'Видео част от live-photo',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Дата от камерата',
     'album_reserved' => 'Всички права запазени',
     'map' => [

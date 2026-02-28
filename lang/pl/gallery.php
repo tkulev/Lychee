@@ -20,6 +20,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'Favourites',
+    'raw' => 'RAW',
     'original' => 'Oryginał',
     'medium' => 'Średni',
     'medium_hidpi' => 'Średni HiDPI',
@@ -30,6 +31,7 @@ return [
     'placeholder' => 'Obraz zastępczy o niskiej jakości',
     'thumbnail' => 'Miniatura zdjęcia',
     'live_video' => 'Część wideo zdjęcia na żywo',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Dane kamery',
     'album_reserved' => 'Wszelkie prawa zastrzeżone',
     'map' => [

@@ -19,6 +19,7 @@ return [
         'shared_with_me' => 'Partagé avec moi',
     ],
     'favourites' => 'Photo favorites',
+    'raw' => 'RAW',
     'original' => 'Original',
     'medium' => 'Moyen',
     'medium_hidpi' => 'Moyen HiDPI',
@@ -29,6 +30,7 @@ return [
     'placeholder' => 'Image de basse qualité (LQIP)',
     'thumbnail' => 'Vignette de la photo',
     'live_video' => 'Partie vidéo d’une live-photo',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Données de l’appareil',
     'album_reserved' => 'Tous droits réservés',
     'map' => [
