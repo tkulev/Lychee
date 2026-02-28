@@ -32,9 +32,9 @@ return new class() extends Migration {
 			$table->dropColumn(self::LEGACY_ID_NAME);
 		});
 
-		// Schema::table('base_albums', function (Blueprint $table) {
-		// 	$table->dropColumn(self::LEGACY_ID_NAME);
-		// });
+		Schema::table('base_albums', function (Blueprint $table) {
+			$table->unsignedBigInteger(self::LEGACY_ID_NAME)->nullable(true)->change();
+		});
 
 		DB::table('configs')
 			->where('key', '=', 'legacy_id_redirection')
