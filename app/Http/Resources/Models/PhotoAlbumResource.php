@@ -8,16 +8,19 @@
 
 namespace App\Http\Resources\Models;
 
-use App\Http\Resources\GalleryConfigs\AlbumConfig;
+use App\Models\Album;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript()]
-class AbstractAlbumResource extends Data
+class PhotoAlbumResource extends Data
 {
-	public function __construct(
-		public AlbumConfig $config,
-		public AlbumResource|SmartAlbumResource|TagAlbumResource|null $resource)
+	public string $id;
+	public string $title;
+
+	public function __construct(Album $album)
 	{
+		$this->id = $album->id;
+		$this->title = $album->title;
 	}
 }

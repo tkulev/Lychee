@@ -15,6 +15,7 @@ return [
         'shared_with_me' => 'Partagé avec moi',
     ],
     'favourites' => 'Photo favorites',
+    'raw' => 'RAW',
     'original' => 'Original',
     'medium' => 'Moyen',
     'medium_hidpi' => 'Moyen HiDPI',
@@ -25,6 +26,7 @@ return [
     'placeholder' => 'Image de basse qualité (LQIP)',
     'thumbnail' => 'Vignette de la photo',
     'live_video' => 'Partie vidéo d’une live-photo',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Données de l’appareil',
     'album_reserved' => 'Tous droits réservés',
     'map' => [
@@ -133,6 +135,9 @@ return [
         ],
         'properties' => [
             'title' => 'Titre',
+            'slug' => 'Slug (URL conviviale)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Description',
             'photo_ordering' => 'Ordre des photos',
             'children_ordering' => 'Ordre des albums',
@@ -189,6 +194,10 @@ return [
             'aperture' => 'Ouverture',
             'focal' => 'Longueur focale',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Statistiques',
                 'number_of_visits' => 'Nombre de visites',

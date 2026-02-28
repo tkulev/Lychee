@@ -16,6 +16,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'Favorieten',
+    'raw' => 'RAW',
     'original' => 'Origineel',
     'medium' => 'Middelgroot',
     'medium_hidpi' => 'Middelgroot HiDPI',
@@ -26,6 +27,7 @@ return [
     'placeholder' => 'Laagkwaliteitsafbeelding Placeholder',
     'thumbnail' => 'Foto miniatuur',
     'live_video' => 'Videodeel van live-foto',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Cameradatum',
     'album_reserved' => 'Alle rechten voorbehouden',
     'map' => [
@@ -134,6 +136,9 @@ return [
         ],
         'properties' => [
             'title' => 'Titel',
+            'slug' => 'Slug (vriendelijke URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Beschrijving',
             'photo_ordering' => 'Foto’s sorteren op',
             'children_ordering' => 'Albums sorteren op',
@@ -190,6 +195,10 @@ return [
             'aperture' => 'Diafragma',
             'focal' => 'Brandpuntsafstand',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Statistieken',
                 'number_of_visits' => 'Aantal bezoeken',

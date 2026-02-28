@@ -15,6 +15,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'Избранные',
+    'raw' => 'RAW',
     'original' => 'Оригинал',
     'medium' => 'Средний',
     'medium_hidpi' => 'Средний HiDPI',
@@ -25,6 +26,7 @@ return [
     'placeholder' => 'Заглушка изображения низкого качества',
     'thumbnail' => 'Миниатюра фото',
     'live_video' => 'Часть видео с живого фото',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Дата камеры',
     'album_reserved' => 'Все права защищены',
     'map' => [
@@ -133,6 +135,9 @@ return [
         ],
         'properties' => [
             'title' => 'Название',
+            'slug' => 'Slug (дружественный URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Описание',
             'photo_ordering' => 'Сортировка фотографий по',
             'children_ordering' => 'Сортировка альбомов по',
@@ -189,6 +194,10 @@ return [
             'aperture' => 'Диафрагма',
             'focal' => 'Фокусное расстояние',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Статистика',
                 'number_of_visits' => 'Кол-во посещений',

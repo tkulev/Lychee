@@ -15,6 +15,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'المفضلة',
+    'raw' => 'RAW',
     'original' => 'الأصلي',
     'medium' => 'متوسط',
     'medium_hidpi' => 'متوسط HiDPI',
@@ -25,6 +26,7 @@ return [
     'placeholder' => 'عنصر نائب للصورة منخفضة الجودة',
     'thumbnail' => 'مصغر الصورة',
     'live_video' => 'جزء الفيديو من الصورة الحية',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'تاريخ الكاميرا',
     'album_reserved' => 'جميع الحقوق محفوظة',
     'map' => [
@@ -133,6 +135,9 @@ return [
         ],
         'properties' => [
             'title' => 'العنوان',
+            'slug' => 'Slug (عنوان URL ودّي)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'الوصف',
             'photo_ordering' => 'ترتيب الصور بواسطة',
             'children_ordering' => 'ترتيب الألبومات بواسطة',
@@ -189,6 +194,10 @@ return [
             'aperture' => 'فتحة العدسة',
             'focal' => 'طول البؤرة',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'الإحصائيات',
                 'number_of_visits' => 'عدد الزيارات',

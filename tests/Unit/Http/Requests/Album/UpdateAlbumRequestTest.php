@@ -24,11 +24,14 @@ use App\Enum\TimelinePhotoGranularity;
 use App\Factories\AlbumFactory;
 use App\Http\Requests\Album\UpdateAlbumRequest;
 use App\Models\Album;
+use App\Models\BaseAlbumImpl;
 use App\Policies\AlbumPolicy;
 use App\Rules\CopyrightRule;
 use App\Rules\DescriptionRule;
 use App\Rules\EnumRequireSupportRule;
 use App\Rules\RandomIDRule;
+use App\Rules\SlugRule;
+use App\Rules\StringRequireSupportRule;
 use App\Rules\TitleRule;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
@@ -47,6 +50,14 @@ class UpdateAlbumRequestTest extends BaseRequestTest
 	public function testAuthorization()
 	{
 		$albumMock = $this->createMock(Album::class);
+		$baseAlbumImpl = new BaseAlbumImpl();
+		$albumMock->method('__get')->willReturnCallback(function (string $key) use ($baseAlbumImpl) {
+			if ($key === 'base_class') {
+				return $baseAlbumImpl;
+			}
+
+			return null;
+		});
 		Config::set('features.populate-request-macros', true);
 
 		Gate::shouldReceive('check')
@@ -116,6 +127,7 @@ class UpdateAlbumRequestTest extends BaseRequestTest
 			RequestAttribute::HEADER_ID_ATTRIBUTE => ['present', new RandomIDRule(true)],
 			RequestAttribute::ALBUM_TIMELINE_ALBUM => ['present', 'nullable', new Enum(TimelineAlbumGranularity::class), new EnumRequireSupportRule(TimelinePhotoGranularity::class, [TimelinePhotoGranularity::DEFAULT, TimelinePhotoGranularity::DISABLED], $this->mock_verify)],
 			RequestAttribute::ALBUM_TIMELINE_PHOTO => ['present', 'nullable', new Enum(TimelinePhotoGranularity::class), new EnumRequireSupportRule(TimelinePhotoGranularity::class, [TimelinePhotoGranularity::DEFAULT, TimelinePhotoGranularity::DISABLED], $this->mock_verify)],
+			RequestAttribute::SLUG_ATTRIBUTE => ['sometimes', 'nullable', new StringRequireSupportRule(null, $this->mock_verify), new SlugRule($request->input(RequestAttribute::ALBUM_ID_ATTRIBUTE))],
 		];
 		$this->assertCount(count($expectedRuleMap), $rules); // only validating the first 7 rules & the GRANTS_UPLOAD_ATTRIBUTE is tested afterwards
 

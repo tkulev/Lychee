@@ -15,6 +15,7 @@ return [
         'shared_with_me' => 'Shared with Me',
     ],
     'favourites' => 'Favoriten',
+    'raw' => 'RAW',
     'original' => 'Original',
     'medium' => 'Mittel',
     'medium_hidpi' => 'Mittel HiDPI',
@@ -25,6 +26,7 @@ return [
     'placeholder' => 'Platzhalter für Bilder niedriger Qualität',
     'thumbnail' => 'Foto-Miniaturansicht',
     'live_video' => 'Videoteil des Live-Fotos',
+    'download_raw' => 'Download RAW',
     'camera_data' => 'Datum Kamera',
     'album_reserved' => 'Alle Rechte vorbehalten',
     'map' => [
@@ -133,6 +135,9 @@ return [
         ],
         'properties' => [
             'title' => 'Titel',
+            'slug' => 'Slug (freundliche URL)',
+            'generate_slug' => 'Generate slug from title',
+            'copy_slug_url' => 'Copy URL to clipboard',
             'description' => 'Beschreibung',
             'photo_ordering' => 'Fotos anordnen nach',
             'children_ordering' => 'Alben anordnen nach',
@@ -189,6 +194,10 @@ return [
             'aperture' => 'Blende',
             'focal' => 'Brennweite',
             'iso' => 'ISO %s',
+            'albums' => 'Albums',
+            'albums_loading' => 'Loading...',
+            'no_albums' => 'This photo is not in any album.',
+            'albums_loading_error' => 'Could not load albums.',
             'stats' => [
                 'header' => 'Statistiken',
                 'number_of_visits' => 'Anzahl der Besuche',

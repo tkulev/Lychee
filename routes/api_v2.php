@@ -42,7 +42,6 @@ Route::get('/Albums', [Gallery\AlbumsController::class, 'get'])->middleware(['lo
 /**
  * ALBUM.
  */
-Route::get('/Album', [Gallery\AlbumController::class, 'get'])->middleware(['login_required:album', 'cache_control']);
 Route::get('/Album::head', [Gallery\AlbumHeadController::class, 'get'])->middleware(['login_required:album', 'cache_control']);
 Route::get('/Album::albums', [Gallery\AlbumChildrenController::class, 'get'])->middleware(['login_required:album', 'cache_control']);
 Route::get('/Album::photos', [Gallery\AlbumPhotosController::class, 'get'])->middleware(['login_required:album', 'cache_control']);
@@ -146,6 +145,7 @@ Route::post('/Photo::highlight', [Gallery\PhotoController::class, 'highlight']);
 Route::post('/Photo::setRating', [Gallery\PhotoController::class, 'rate']);
 Route::post('/Photo::rotate', [Gallery\PhotoController::class, 'rotate']);
 Route::post('/Photo::watermark', [Gallery\PhotoController::class, 'watermark'])->middleware('support:se');
+Route::get('/Photo/{photo_id}/albums', [Gallery\PhotoController::class, 'albums']);
 Route::delete('/Photo', [Gallery\PhotoController::class, 'delete']);
 
 // Route::get('/Photo::getArchive', [PhotoController::class, 'getArchive'])

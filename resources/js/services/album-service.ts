@@ -16,6 +16,7 @@ export type CreateTagAlbumData = {
 export type UpdateAbumData = {
 	album_id: string;
 	title: string;
+	slug: string | null;
 	license: string | null;
 	description: string | null;
 	photo_sorting_column: App.Enum.ColumnSortingPhotoType | null;
@@ -35,6 +36,7 @@ export type UpdateAbumData = {
 export type UpdateTagAlbumData = {
 	album_id: string;
 	title: string;
+	slug: string | null;
 	tags: string[];
 	description: string | null;
 	photo_sorting_column: App.Enum.ColumnSortingPhotoType | null;
@@ -85,20 +87,6 @@ const AlbumService = {
 	getAll(): Promise<AxiosResponse<App.Http.Resources.Collections.RootAlbumResource>> {
 		const requester = axios as unknown as AxiosCacheInstance;
 		return requester.get(`${Constants.getApiUrl()}Albums`, { data: {}, id: "albums" });
-	},
-
-	get(album_id: string, page?: number): Promise<AxiosResponse<App.Http.Resources.Models.AbstractAlbumResource>> {
-		const params = {
-			album_id: album_id,
-			page: page ?? 1,
-		};
-
-		const requester = axios as unknown as AxiosCacheInstance;
-		return requester.get(`${Constants.getApiUrl()}Album`, {
-			params: params,
-			data: {},
-			id: `album_${album_id}_page${page ?? 1}`,
-		});
 	},
 
 	getHead(album_id: string): Promise<AxiosResponse<App.Http.Resources.Models.HeadAbstractAlbumResource>> {
