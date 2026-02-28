@@ -458,38 +458,36 @@ class Album extends BaseAlbum implements Node
 	 */
 	public function getComputedTitleColor(): string
 	{
-		// Default to white if not set
-		if ($this->title_color === null) {
-			return '#ffffff';
-		}
+		return match ($this->title_color) {
+			// Default to white if not set
+			null => '#ffffff',
+			AlbumTitleColor::WHITE => '#ffffff',
+			AlbumTitleColor::BLACK => '#000000',
+			default => $this->getPaletteColor(),
+		};
+	}
 
-		$value = $this->title_color->value;
-
-		// Handle basic colors
-		if ($value === AlbumTitleColor::WHITE) {
-			return '#ffffff';
-		}
-		if ($value === AlbumTitleColor::BLACK) {
-			return '#000000';
-		}
-
+	/**
+	 * Return the title color for the current album palette.
+	 *
+	 * @return string
+	 */
+	private function getPaletteColor(): string
+	{
 		// Handle palette colors (color1 through color5)
 		$palette = $this->getHeaderPalette();
-
 		if ($palette === null) {
 			return '#ffffff';
 		}
 
-		$color = match ($value) {
-			AlbumTitleColor::COLOUR_1 => $palette->colour_1,
-			AlbumTitleColor::COLOUR_2 => $palette->colour_2,
-			AlbumTitleColor::COLOUR_3 => $palette->colour_3,
-			AlbumTitleColor::COLOUR_4 => $palette->colour_4,
-			AlbumTitleColor::COLOUR_5 => $palette->colour_5,
+		return match ($this->title_color) {
+			AlbumTitleColor::COLOUR_1 => Palette::toHex($palette->colour_1),
+			AlbumTitleColor::COLOUR_2 => Palette::toHex($palette->colour_2),
+			AlbumTitleColor::COLOUR_3 => Palette::toHex($palette->colour_3),
+			AlbumTitleColor::COLOUR_4 => Palette::toHex($palette->colour_4),
+			AlbumTitleColor::COLOUR_5 => Palette::toHex($palette->colour_5),
 			default => '#ffffff',
 		};
-
-		return $color;
 	}
 
 	/**

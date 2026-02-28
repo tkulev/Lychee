@@ -17,6 +17,7 @@ use App\Enum\LicenseType;
 use App\Enum\PhotoLayoutType;
 use App\Enum\TimelineAlbumGranularity;
 use App\Enum\TimelinePhotoGranularity;
+use App\Http\Resources\Models\Utils\HeaderFocusData;
 use App\Models\Album;
 use App\Models\TagAlbum;
 use Spatie\LaravelData\Data;
@@ -41,7 +42,7 @@ class EditableBaseAlbumResource extends Data
 	public ?TimelinePhotoGranularity $photo_timeline;
 	public ?AlbumTitleColor $title_color;
 	public ?AlbumTitlePosition $title_position;
-	public ?array $header_photo_focus;
+	public ?HeaderFocusData $header_photo_focus;
 	/** @var string[] */
 	public array $tags = [];
 	public bool $is_and = true;
@@ -79,7 +80,12 @@ class EditableBaseAlbumResource extends Data
 			$this->album_timeline = $album->album_timeline;
 			$this->title_color = $album->title_color;
 			$this->title_position = $album->title_position;
-			$this->header_photo_focus = $album->header_photo_focus;
+			if ($album->header_photo_focus !== null) {
+				$this->header_photo_focus = new HeaderFocusData(
+					x: $album->header_photo_focus['x'] ?? null,
+					y: $album->header_photo_focus['y'] ?? null,
+				);
+			}
 		}
 
 		if ($album instanceof TagAlbum) {

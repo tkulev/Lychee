@@ -38,7 +38,7 @@ class PreFormattedAlbumData extends Data
 
 	public ?string $title_color = null;
 	public ?string $title_position = null;
-	public ?array $header_photo_focus = null;
+	public ?HeaderFocusData $header_photo_focus = null;
 
 	public function __construct(AbstractAlbum $album, ?string $url)
 	{
@@ -61,7 +61,12 @@ class PreFormattedAlbumData extends Data
 			$this->license = $album->license === LicenseType::NONE ? '' : $album->license->localization();
 			$this->title_color = $album->title_color?->value;
 			$this->title_position = $album->title_position?->value;
-			$this->header_photo_focus = $album->header_photo_focus;
+			if ($album->header_photo_focus !== null) {
+				$this->header_photo_focus = new HeaderFocusData(
+					x: $album->header_photo_focus['x'] ?? null,
+					y: $album->header_photo_focus['y'] ?? null,
+				);
+			}
 
 			if ($album->header !== null && $album->header !== null && $album->header->palette !== null) {
 				$this->palette = ColourPaletteResource::fromModel($album->header->palette);

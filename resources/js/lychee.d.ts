@@ -296,7 +296,7 @@ declare namespace App.Http.Resources.Editable {
 		photo_timeline: App.Enum.TimelinePhotoGranularity | null;
 		title_color: App.Enum.AlbumTitleColor | null;
 		title_position: App.Enum.AlbumTitlePosition | null;
-		header_photo_focus: Array<any> | null;
+		header_photo_focus: App.Http.Resources.Models.Utils.HeaderFocusData | null;
 		tags: Array<string>;
 		is_and: boolean;
 		is_model_album: boolean;
@@ -826,6 +826,10 @@ declare namespace App.Http.Resources.Models.Utils {
 		grants_upload: boolean;
 		is_password_required: boolean;
 	};
+	export type HeaderFocusData = {
+		x: number;
+		y: number;
+	};
 	export type PreComputedPhotoData = {
 		is_video: boolean;
 		is_raw: boolean;
@@ -852,7 +856,7 @@ declare namespace App.Http.Resources.Models.Utils {
 		palette: App.Http.Resources.Models.ColourPaletteResource | null;
 		title_color: string | null;
 		title_position: string | null;
-		header_photo_focus: Array<any> | null;
+		header_photo_focus: App.Http.Resources.Models.Utils.HeaderFocusData | null;
 	};
 	export type PreformattedPhotoData = {
 		created_at: string;

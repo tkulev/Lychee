@@ -146,7 +146,6 @@ const emits = defineEmits<{
 
 const props = defineProps<{
 	album:
-		| App.Http.Resources.Models.AlbumResource
 		| App.Http.Resources.Models.HeadAlbumResource
 		| App.Http.Resources.Models.HeadTagAlbumResource
 		| App.Http.Resources.Models.HeadSmartAlbumResource;
@@ -256,6 +255,7 @@ function saveChanges() {
 		album_id: props.album.id,
 		title: props.album.title,
 		license: data.license,
+		slug: props.album.slug,
 		description: data.description ?? null,
 		photo_sorting_column: (data.photo_sorting?.column as App.Enum.ColumnSortingPhotoType) ?? null,
 		photo_sorting_order: data.photo_sorting?.order ?? null,
