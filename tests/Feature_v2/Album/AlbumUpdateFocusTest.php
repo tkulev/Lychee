@@ -40,8 +40,8 @@ class AlbumUpdateFocusTest extends BaseApiWithDataTest
 		$this->assertOk($response);
 
 		// Assert clamped values
-		$response->assertJsonPath('resource.header_photo_focus.x', -1);
-		$response->assertJsonPath('resource.header_photo_focus.y', 1);
+		$response->assertJsonPath('resource.preFormattedData.header_photo_focus.x', -1);
+		$response->assertJsonPath('resource.preFormattedData.header_photo_focus.y', 1);
 	}
 
 	public function testUpdateAlbumWithFocus(): void
